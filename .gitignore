@@ -354,4 +354,4 @@ APIKeys.cs
 
 # migrations folder ignore
 
-/**Migrations**/
+**/Migrations/**
