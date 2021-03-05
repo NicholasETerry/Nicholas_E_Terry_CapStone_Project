@@ -10,74 +10,91 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Lead_paragraph)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Source)
-            </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.Word_count)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Web_url)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Pub_date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.News_desk)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ArticleAuthor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserSuggestedArticleAttributes)
-            </th>
-            <th></th>*@
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+@foreach (var item in Model)
+{
+    <div class="container">
+        <div class="jumbotron">
+            <p class="lead">@item.Lead_paragraph</p>
+            <hr class="my-4">
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" href=@item.Web_url role="button">Read Article</a>
+            </p>
+        </div>
+    </div>
+}
+
+
+
+
+
+
+@*<table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Lead_paragraph)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Web_url)
-                </td>
-                @*<td>
-                    @Html.DisplayFor(modelItem => item.Source)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Word_count)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Web_url)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Pub_date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.News_desk)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ArticleAuthor.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserSuggestedArticleAttributes.Id)
-                </td>*@
-                @*<td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.Lead_paragraph)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Source)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Word_count)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Web_url)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Pub_date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.News_desk)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ArticleAuthor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserSuggestedArticleAttributes)
+                </th>
+                <th></th>
             </tr>
-            <a href="@item.Web_url"></a> 
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Lead_paragraph)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Web_url)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Source)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Word_count)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Web_url)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pub_date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.News_desk)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ArticleAuthor.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserSuggestedArticleAttributes.Id)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>*@
