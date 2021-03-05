@@ -40,24 +40,9 @@
                 <span asp-validation-for="OccupationId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PreviousOccupationId" class="control-label"></label>
-                <select asp-for="PreviousOccupationId" class="form-control" asp-items="ViewBag.PreviousOccupationId"></select>
-                <span asp-validation-for="PreviousOccupationId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="EducationId" class="control-label"></label>
                 <select asp-for="EducationId" class="form-control" asp-items="ViewBag.EducationId"></select>
                 <span asp-validation-for="EducationId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SkillId" class="control-label"></label>
-                <select asp-for="SkillId" class="form-control" asp-items="ViewBag.SkillId"></select>
-                <span asp-validation-for="SkillId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HobbyId" class="control-label"></label>
-                <select asp-for="HobbyId" class="form-control" asp-items="ViewBag.HobbyId"></select>
-                <span asp-validation-for="HobbyId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="UserNameId" class="control-label"></label>
@@ -68,6 +53,11 @@
                 <label asp-for="RankId" class="control-label"></label>
                 <select asp-for="RankId" class="form-control" asp-items="ViewBag.RankId"></select>
                 <span asp-validation-for="RankId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdentityUserId" class="control-label"></label>
+                <select asp-for="IdentityUserId" class="form-control" asp-items="ViewBag.IdentityUserId"></select>
+                <span asp-validation-for="IdentityUserId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

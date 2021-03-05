@@ -22,8 +22,10 @@ namespace Nicholas_E_Terry_CapStone.Controllers
         // GET: Contributor
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.UserModels.Include(u => u.Education).Include(u => u.Hobby).Include(u => u.Occupation).Include(u => u.PreviousOccupation).Include(u => u.Rank).Include(u => u.Skill).Include(u => u.UserModelAddress).Include(u => u.UserNameModel);
-            return View(await applicationDbContext.ToListAsync());
+            var contributor = _context.UserModels.Include(u => u.Education).Include(u => u.IdentityUser).Include(u => u.Occupation).Include(u => u.Rank).Include(u => u.UserModelAddress).Include(u => u.UserNameModel);
+           // UserModel newModel = new UserModel();
+           // newModel.UserModelAddress.City
+            return View(await contributor.ToListAsync());
         }
 
         // GET: Contributor/Details/5
@@ -36,11 +38,9 @@ namespace Nicholas_E_Terry_CapStone.Controllers
 
             var userModel = await _context.UserModels
                 .Include(u => u.Education)
-                .Include(u => u.Hobby)
+                .Include(u => u.IdentityUser)
                 .Include(u => u.Occupation)
-                .Include(u => u.PreviousOccupation)
                 .Include(u => u.Rank)
-                .Include(u => u.Skill)
                 .Include(u => u.UserModelAddress)
                 .Include(u => u.UserNameModel)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -56,11 +56,9 @@ namespace Nicholas_E_Terry_CapStone.Controllers
         public IActionResult Create()
         {
             ViewData["EducationId"] = new SelectList(_context.Education, "Id", "Id");
-            ViewData["HobbyId"] = new SelectList(_context.Hobbies, "Id", "Id");
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
             ViewData["OccupationId"] = new SelectList(_context.Occupations, "Id", "Id");
-            ViewData["PreviousOccupationId"] = new SelectList(_context.PreviousOccupations, "Id", "Id");
             ViewData["RankId"] = new SelectList(_context.Rankings, "Id", "Id");
-            ViewData["SkillId"] = new SelectList(_context.Skills, "Id", "Id");
             ViewData["UserAddressId"] = new SelectList(_context.UserModelAddresses, "Id", "Id");
             ViewData["UserNameId"] = new SelectList(_context.UserNamesModel, "Id", "Id");
             return View();
@@ -71,7 +69,7 @@ namespace Nicholas_E_Terry_CapStone.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,First_name,Last_name,Email_address,UserAddressId,OccupationId,PreviousOccupationId,EducationId,SkillId,HobbyId,UserNameId,RankId")] UserModel userModel)
+        public async Task<IActionResult> Create([Bind("Id,First_name,Last_name,Email_address,UserAddressId,OccupationId,EducationId,UserNameId,RankId,IdentityUserId")] UserModel userModel)
         {
             if (ModelState.IsValid)
             {
@@ -80,11 +78,9 @@ namespace Nicholas_E_Terry_CapStone.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["EducationId"] = new SelectList(_context.Education, "Id", "Id", userModel.EducationId);
-            ViewData["HobbyId"] = new SelectList(_context.Hobbies, "Id", "Id", userModel.HobbyId);
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", userModel.IdentityUserId);
             ViewData["OccupationId"] = new SelectList(_context.Occupations, "Id", "Id", userModel.OccupationId);
-            ViewData["PreviousOccupationId"] = new SelectList(_context.PreviousOccupations, "Id", "Id", userModel.PreviousOccupationId);
             ViewData["RankId"] = new SelectList(_context.Rankings, "Id", "Id", userModel.RankId);
-            ViewData["SkillId"] = new SelectList(_context.Skills, "Id", "Id", userModel.SkillId);
             ViewData["UserAddressId"] = new SelectList(_context.UserModelAddresses, "Id", "Id", userModel.UserAddressId);
             ViewData["UserNameId"] = new SelectList(_context.UserNamesModel, "Id", "Id", userModel.UserNameId);
             return View(userModel);
@@ -104,11 +100,9 @@ namespace Nicholas_E_Terry_CapStone.Controllers
                 return NotFound();
             }
             ViewData["EducationId"] = new SelectList(_context.Education, "Id", "Id", userModel.EducationId);
-            ViewData["HobbyId"] = new SelectList(_context.Hobbies, "Id", "Id", userModel.HobbyId);
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", userModel.IdentityUserId);
             ViewData["OccupationId"] = new SelectList(_context.Occupations, "Id", "Id", userModel.OccupationId);
-            ViewData["PreviousOccupationId"] = new SelectList(_context.PreviousOccupations, "Id", "Id", userModel.PreviousOccupationId);
             ViewData["RankId"] = new SelectList(_context.Rankings, "Id", "Id", userModel.RankId);
-            ViewData["SkillId"] = new SelectList(_context.Skills, "Id", "Id", userModel.SkillId);
             ViewData["UserAddressId"] = new SelectList(_context.UserModelAddresses, "Id", "Id", userModel.UserAddressId);
             ViewData["UserNameId"] = new SelectList(_context.UserNamesModel, "Id", "Id", userModel.UserNameId);
             return View(userModel);
@@ -119,7 +113,7 @@ namespace Nicholas_E_Terry_CapStone.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,First_name,Last_name,Email_address,UserAddressId,OccupationId,PreviousOccupationId,EducationId,SkillId,HobbyId,UserNameId,RankId")] UserModel userModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,First_name,Last_name,Email_address,UserAddressId,OccupationId,EducationId,UserNameId,RankId,IdentityUserId")] UserModel userModel)
         {
             if (id != userModel.Id)
             {
@@ -147,11 +141,9 @@ namespace Nicholas_E_Terry_CapStone.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["EducationId"] = new SelectList(_context.Education, "Id", "Id", userModel.EducationId);
-            ViewData["HobbyId"] = new SelectList(_context.Hobbies, "Id", "Id", userModel.HobbyId);
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", userModel.IdentityUserId);
             ViewData["OccupationId"] = new SelectList(_context.Occupations, "Id", "Id", userModel.OccupationId);
-            ViewData["PreviousOccupationId"] = new SelectList(_context.PreviousOccupations, "Id", "Id", userModel.PreviousOccupationId);
             ViewData["RankId"] = new SelectList(_context.Rankings, "Id", "Id", userModel.RankId);
-            ViewData["SkillId"] = new SelectList(_context.Skills, "Id", "Id", userModel.SkillId);
             ViewData["UserAddressId"] = new SelectList(_context.UserModelAddresses, "Id", "Id", userModel.UserAddressId);
             ViewData["UserNameId"] = new SelectList(_context.UserNamesModel, "Id", "Id", userModel.UserNameId);
             return View(userModel);
@@ -167,11 +159,9 @@ namespace Nicholas_E_Terry_CapStone.Controllers
 
             var userModel = await _context.UserModels
                 .Include(u => u.Education)
-                .Include(u => u.Hobby)
+                .Include(u => u.IdentityUser)
                 .Include(u => u.Occupation)
-                .Include(u => u.PreviousOccupation)
                 .Include(u => u.Rank)
-                .Include(u => u.Skill)
                 .Include(u => u.UserModelAddress)
                 .Include(u => u.UserNameModel)
                 .FirstOrDefaultAsync(m => m.Id == id);

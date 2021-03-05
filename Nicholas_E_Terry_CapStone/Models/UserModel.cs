@@ -32,21 +32,9 @@ namespace Nicholas_E_Terry_CapStone.Models
         public int OccupationId { get; set; }
         public Occupation Occupation { get; set; }
 
-        [ForeignKey("PreviousOccupation")]
-        public int PreviousOccupationId { get; set; }
-        public PreviousOccupation PreviousOccupation { get; set; }
-
         [ForeignKey("Education")]
         public int EducationId { get; set; }
         public Education Education { get; set; }
-
-        [ForeignKey("Skill")]
-        public int SkillId { get; set; }
-        public Skill Skill { get; set; }
-
-        [ForeignKey("Hobby")]
-        public int HobbyId { get; set; }
-        public Hobby Hobby { get; set; }
 
         [ForeignKey("UserNameModel")]
         public int UserNameId { get; set; }
@@ -54,7 +42,7 @@ namespace Nicholas_E_Terry_CapStone.Models
 
         [ForeignKey("Rank")]
         public int RankId { get; set; }
-        public Rank Rank { get; set; }
+        public  Rank Rank { get; set; }
 
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }

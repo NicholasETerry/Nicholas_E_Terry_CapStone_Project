@@ -29,22 +29,16 @@
                 @Html.DisplayNameFor(model => model.Occupation)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PreviousOccupation)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Education)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Skill)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Hobby)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.UserNameModel)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Rank)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdentityUser)
             </th>
             <th></th>
         </tr>
@@ -68,22 +62,16 @@
                 @Html.DisplayFor(modelItem => item.Occupation.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PreviousOccupation.Id)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Education.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Skill.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hobby.Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UserNameModel.Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Rank.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdentityUser.Id)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

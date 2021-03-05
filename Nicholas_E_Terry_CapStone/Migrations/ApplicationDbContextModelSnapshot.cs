@@ -48,15 +48,15 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e42ce4db-39e8-4652-88b4-973a1a3f8a0c",
-                            ConcurrencyStamp = "bffa3786-5839-4ae9-a045-99a9fdb148a7",
+                            Id = "601af630-fa46-4f39-882a-281e7c70620e",
+                            ConcurrencyStamp = "eb21de73-52eb-47ff-a3ea-6f2c9b41f77b",
                             Name = "Consumer",
                             NormalizedName = "CONSUMER"
                         },
                         new
                         {
-                            Id = "6d7fff93-6710-455a-b277-412509e1c119",
-                            ConcurrencyStamp = "23f9b9c2-4274-4822-8ffb-55393f64d0be",
+                            Id = "31e2cf15-03a2-438a-bc61-c7bd568dd524",
+                            ConcurrencyStamp = "d2e6e2ec-f1b7-4283-8987-449654b41c8b",
                             Name = "Contributor",
                             NormalizedName = "CONTRIBUTOR"
                         });
@@ -320,7 +320,12 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                     b.Property<string>("Hobby_user")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("UserModelId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserModelId");
 
                     b.ToTable("Hobbies");
                 });
@@ -353,10 +358,15 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                     b.Property<string>("Previous_occupation")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("UserModelId")
+                        .HasColumnType("int");
+
                     b.Property<string>("experience")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserModelId");
 
                     b.ToTable("PreviousOccupations");
                 });
@@ -389,7 +399,12 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                     b.Property<string>("Skill_user")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("UserModelId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserModelId");
 
                     b.ToTable("Skills");
                 });
@@ -412,9 +427,6 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("HobbyId")
-                        .HasColumnType("int");
-
                     b.Property<string>("IdentityUserId")
                         .HasColumnType("nvarchar(450)");
 
@@ -425,13 +437,7 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                     b.Property<int>("OccupationId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PreviousOccupationId")
-                        .HasColumnType("int");
-
                     b.Property<int>("RankId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SkillId")
                         .HasColumnType("int");
 
                     b.Property<int>("UserAddressId")
@@ -444,17 +450,11 @@ namespace Nicholas_E_Terry_CapStone.Migrations
 
                     b.HasIndex("EducationId");
 
-                    b.HasIndex("HobbyId");
-
                     b.HasIndex("IdentityUserId");
 
                     b.HasIndex("OccupationId");
 
-                    b.HasIndex("PreviousOccupationId");
-
                     b.HasIndex("RankId");
-
-                    b.HasIndex("SkillId");
 
                     b.HasIndex("UserAddressId");
 
@@ -608,17 +608,38 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Nicholas_E_Terry_CapStone.Models.Hobby", b =>
+                {
+                    b.HasOne("Nicholas_E_Terry_CapStone.Models.UserModel", "UserModel")
+                        .WithMany()
+                        .HasForeignKey("UserModelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Nicholas_E_Terry_CapStone.Models.PreviousOccupation", b =>
+                {
+                    b.HasOne("Nicholas_E_Terry_CapStone.Models.UserModel", "UserModel")
+                        .WithMany()
+                        .HasForeignKey("UserModelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Nicholas_E_Terry_CapStone.Models.Skill", b =>
+                {
+                    b.HasOne("Nicholas_E_Terry_CapStone.Models.UserModel", "UserModel")
+                        .WithMany()
+                        .HasForeignKey("UserModelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Nicholas_E_Terry_CapStone.Models.UserModel", b =>
                 {
                     b.HasOne("Nicholas_E_Terry_CapStone.Models.Education", "Education")
                         .WithMany()
                         .HasForeignKey("EducationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Nicholas_E_Terry_CapStone.Models.Hobby", "Hobby")
-                        .WithMany()
-                        .HasForeignKey("HobbyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -632,21 +653,9 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Nicholas_E_Terry_CapStone.Models.PreviousOccupation", "PreviousOccupation")
-                        .WithMany()
-                        .HasForeignKey("PreviousOccupationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Nicholas_E_Terry_CapStone.Models.Rank", "Rank")
                         .WithMany()
                         .HasForeignKey("RankId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Nicholas_E_Terry_CapStone.Models.Skill", "Skill")
-                        .WithMany()
-                        .HasForeignKey("SkillId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
