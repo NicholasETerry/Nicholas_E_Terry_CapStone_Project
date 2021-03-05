@@ -15,7 +15,7 @@ namespace Nicholas_E_Terry_CapStone.Services
 
         }
 
-        public async Task<Article> GetCurrentArticles()
+        public async Task <Article> GetCurrentArticles()
         {
             HttpClient client = new HttpClient();
             HttpResponseMessage response = await client.GetAsync($"https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key={APIKeys.NewYorkTimesKey}");

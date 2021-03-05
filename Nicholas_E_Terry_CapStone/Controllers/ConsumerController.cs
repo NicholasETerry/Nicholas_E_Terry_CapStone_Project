@@ -7,23 +7,39 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Nicholas_E_Terry_CapStone.Data;
 using Nicholas_E_Terry_CapStone.Models;
+using Nicholas_E_Terry_CapStone.Services;
 
 namespace Nicholas_E_Terry_CapStone.Controllers
 {
     public class ConsumerController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly NYTService _nytService;
 
-        public ConsumerController(ApplicationDbContext context)
+        public ConsumerController(ApplicationDbContext context, NYTService nytService)
         {
             _context = context;
+            _nytService = nytService;
         }
 
         // GET: Consumer
         public async Task<IActionResult> Index()
         {
+            var newArticle = await _nytService.GetCurrentArticles();
+
+            List<CleanArticle> cleaned = new List<CleanArticle>();
+          
+            int i = 0;
+            foreach (var item in newArticle.response.docs)
+            {
+                CleanArticle newCleanedArticle = new CleanArticle();
+                cleaned.Add(newCleanedArticle);
+                cleaned[i].Lead_paragraph = item.snippet;
+                cleaned[i].Web_url = item.web_url;
+                i++;
+            }
             var applicationDbContext = _context.UserModels.Include(u => u.Education).Include(u => u.Hobby).Include(u => u.Occupation).Include(u => u.PreviousOccupation).Include(u => u.Rank).Include(u => u.Skill).Include(u => u.UserModelAddress).Include(u => u.UserNameModel);
-            return View(await applicationDbContext.ToListAsync());
+            return View(cleaned/*await applicationDbContext.ToListAsync()*/);
         }
 
         // GET: Consumer/Details/5

@@ -48,16 +48,16 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "69c615e1-3938-4505-a1d5-64140f1b5d63",
-                            ConcurrencyStamp = "22d846a2-4f48-4279-beb5-286346bfe7ae",
-                            Name = "consumer (this is temp)",
+                            Id = "e42ce4db-39e8-4652-88b4-973a1a3f8a0c",
+                            ConcurrencyStamp = "bffa3786-5839-4ae9-a045-99a9fdb148a7",
+                            Name = "Consumer",
                             NormalizedName = "CONSUMER"
                         },
                         new
                         {
-                            Id = "916c2f42-01e0-4087-8245-7ce3e1150205",
-                            ConcurrencyStamp = "4d4a4295-95b7-4f07-89cf-84168b68f293",
-                            Name = "contributor (this is temp)",
+                            Id = "6d7fff93-6710-455a-b277-412509e1c119",
+                            ConcurrencyStamp = "23f9b9c2-4274-4822-8ffb-55393f64d0be",
+                            Name = "Contributor",
                             NormalizedName = "CONTRIBUTOR"
                         });
                 });
@@ -415,6 +415,9 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                     b.Property<int>("HobbyId")
                         .HasColumnType("int");
 
+                    b.Property<string>("IdentityUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Last_name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -442,6 +445,8 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                     b.HasIndex("EducationId");
 
                     b.HasIndex("HobbyId");
+
+                    b.HasIndex("IdentityUserId");
 
                     b.HasIndex("OccupationId");
 
@@ -616,6 +621,10 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                         .HasForeignKey("HobbyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
+                        .WithMany()
+                        .HasForeignKey("IdentityUserId");
 
                     b.HasOne("Nicholas_E_Terry_CapStone.Models.Occupation", "Occupation")
                         .WithMany()

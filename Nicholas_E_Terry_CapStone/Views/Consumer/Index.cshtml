@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Nicholas_E_Terry_CapStone.Models.UserModel>
+﻿@model IEnumerable<Nicholas_E_Terry_CapStone.Models.CleanArticle>
 
 @{
     ViewData["Title"] = "Index";
@@ -14,83 +14,70 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.First_name)
+                @Html.DisplayNameFor(model => model.Lead_paragraph)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Last_name)
+                @Html.DisplayNameFor(model => model.Source)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.Word_count)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email_address)
+                @Html.DisplayNameFor(model => model.Web_url)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UserModelAddress)
+                @Html.DisplayNameFor(model => model.Pub_date)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Occupation)
+                @Html.DisplayNameFor(model => model.News_desk)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PreviousOccupation)
+                @Html.DisplayNameFor(model => model.ArticleAuthor)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Education)
+                @Html.DisplayNameFor(model => model.UserSuggestedArticleAttributes)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Skill)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Hobby)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserNameModel)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rank)
-            </th>
-            <th></th>
+            <th></th>*@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.First_name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Last_name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email_address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserModelAddress.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Occupation.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PreviousOccupation.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Education.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Skill.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hobby.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserNameModel.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rank.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lead_paragraph)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Web_url)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.Source)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Word_count)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Web_url)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pub_date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.News_desk)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ArticleAuthor.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserSuggestedArticleAttributes.Id)
+                </td>*@
+                @*<td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>*@
+            </tr>
+            <a href="@item.Web_url"></a> 
+        }
     </tbody>
 </table>

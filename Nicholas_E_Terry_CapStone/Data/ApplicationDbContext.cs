@@ -39,14 +39,14 @@ namespace Nicholas_E_Terry_CapStone.Data
             builder.Entity<IdentityRole>().HasData(
                 new IdentityRole
                 {
-                    Name = "consumer (this is temp)",
+                    Name = "Consumer",
                     NormalizedName = "CONSUMER"
                 }
                 );
             builder.Entity<IdentityRole>().HasData(
             new IdentityRole
             {
-                Name = "contributor (this is temp)",
+                Name = "Contributor",
                 NormalizedName = "CONTRIBUTOR"
             }
             );

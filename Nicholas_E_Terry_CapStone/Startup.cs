@@ -12,6 +12,10 @@ using Nicholas_E_Terry_CapStone.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
+using Nicholas_E_Terry_CapStone.ActionFilters;
+using Nicholas_E_Terry_CapStone.Services;
 
 namespace Nicholas_E_Terry_CapStone
 {
@@ -32,9 +36,16 @@ namespace Nicholas_E_Terry_CapStone
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultUI().AddDefaultTokenProviders();
+            services.AddScoped<ClaimsPrincipal>(s => s.GetService<IHttpContextAccessor>().HttpContext.User);
+            services.AddControllers(config =>
+            {
+                config.Filters.Add(typeof(GlobalRouting));
+            });
+
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddTransient<NYTService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
