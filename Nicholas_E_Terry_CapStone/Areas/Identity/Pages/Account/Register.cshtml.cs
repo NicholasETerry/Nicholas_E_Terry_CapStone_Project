@@ -50,6 +50,7 @@ namespace Nicholas_E_Terry_CapStone.Areas.Identity.Pages.Account
 
         public class InputModel
         {
+            
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -67,6 +68,11 @@ namespace Nicholas_E_Terry_CapStone.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
             [Required]
             public string Role { get; set; }
+
+            //[Required]
+            //[Display(Name = "User Name")]
+            //public  string InputUserName { get; set; }
+
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -76,7 +82,6 @@ namespace Nicholas_E_Terry_CapStone.Areas.Identity.Pages.Account
             var roles = _roleManager.Roles;
             Roles = new SelectList(roles, "Name", "Name");
         }
-
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
@@ -84,6 +89,7 @@ namespace Nicholas_E_Terry_CapStone.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+                
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

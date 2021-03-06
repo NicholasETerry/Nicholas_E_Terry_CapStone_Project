@@ -48,15 +48,15 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "601af630-fa46-4f39-882a-281e7c70620e",
-                            ConcurrencyStamp = "eb21de73-52eb-47ff-a3ea-6f2c9b41f77b",
+                            Id = "45db6adc-825f-4e62-8556-f885e5f592c7",
+                            ConcurrencyStamp = "990b4b51-1b81-46cf-9ef1-4a5ea9192949",
                             Name = "Consumer",
                             NormalizedName = "CONSUMER"
                         },
                         new
                         {
-                            Id = "31e2cf15-03a2-438a-bc61-c7bd568dd524",
-                            ConcurrencyStamp = "d2e6e2ec-f1b7-4283-8987-449654b41c8b",
+                            Id = "9ab8fa73-8883-4251-9d5f-d68249995f4e",
+                            ConcurrencyStamp = "05053dd1-44a8-4615-9b59-0dbe9c9c45e5",
                             Name = "Contributor",
                             NormalizedName = "CONTRIBUTOR"
                         });
@@ -529,7 +529,13 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("UsernameId")
+                    b.Property<int>("CleanArticleVoteId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserNameModelVoteId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UsernameVoteId")
                         .HasColumnType("int");
 
                     b.Property<string>("vote")
@@ -537,7 +543,9 @@ namespace Nicholas_E_Terry_CapStone.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UsernameId");
+                    b.HasIndex("CleanArticleVoteId");
+
+                    b.HasIndex("UserNameModelVoteId");
 
                     b.ToTable("Votes");
                 });
@@ -683,11 +691,15 @@ namespace Nicholas_E_Terry_CapStone.Migrations
 
             modelBuilder.Entity("Nicholas_E_Terry_CapStone.Models.Vote", b =>
                 {
-                    b.HasOne("Nicholas_E_Terry_CapStone.Models.UserNameModel", "UserNameModel")
+                    b.HasOne("Nicholas_E_Terry_CapStone.Models.CleanArticle", "CleanArticleVote")
                         .WithMany()
-                        .HasForeignKey("UsernameId")
+                        .HasForeignKey("CleanArticleVoteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Nicholas_E_Terry_CapStone.Models.UserNameModel", "UserNameModelVote")
+                        .WithMany()
+                        .HasForeignKey("UserNameModelVoteId");
                 });
 #pragma warning restore 612, 618
         }

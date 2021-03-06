@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Nicholas_E_Terry_CapStone.Data;
 using Nicholas_E_Terry_CapStone.Models;
 using Nicholas_E_Terry_CapStone.Services;
+using static Microsoft.AspNetCore.Identity.UI.V3.Pages.Account.Internal.ExternalLoginModel;
 
 namespace Nicholas_E_Terry_CapStone.Controllers
 {
@@ -27,7 +28,9 @@ namespace Nicholas_E_Terry_CapStone.Controllers
         public async Task<IActionResult> Index()
         {
             var newArticle = await _nytService.GetCurrentArticles();
-
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = _context.UserModels.Where(c => c.IdentityUserId ==
+            userId).SingleOrDefault();
             List<CleanArticle> cleaned = new List<CleanArticle>();
           
             int i = 0;

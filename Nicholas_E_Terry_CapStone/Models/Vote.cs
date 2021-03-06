@@ -14,7 +14,12 @@ namespace Nicholas_E_Terry_CapStone.Models
         public string vote { get; set; }
 
         [ForeignKey("UserNameModel")]
-        public int UsernameId { get; set; }
-        public UserNameModel UserNameModel { get; set; }
+        public int UsernameVoteId { get; set; }
+        public UserNameModel UserNameModelVote { get; set; }
+
+        [ForeignKey("CleanArticle")]
+        public int CleanArticleVoteId { get; set; }
+        public CleanArticle CleanArticleVote { get; set; }
+
     }
 }
