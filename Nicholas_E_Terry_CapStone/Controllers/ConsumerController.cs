@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore;
 using Nicholas_E_Terry_CapStone.Data;
 using Nicholas_E_Terry_CapStone.Models;
 using Nicholas_E_Terry_CapStone.Services;
-using static Microsoft.AspNetCore.Identity.UI.V3.Pages.Account.Internal.ExternalLoginModel;
 
 namespace Nicholas_E_Terry_CapStone.Controllers
 {
@@ -17,6 +16,7 @@ namespace Nicholas_E_Terry_CapStone.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly NYTService _nytService;
+        
 
         public ConsumerController(ApplicationDbContext context, NYTService nytService)
         {
@@ -27,6 +27,7 @@ namespace Nicholas_E_Terry_CapStone.Controllers
         // GET: Consumer
         public async Task<IActionResult> Index()
         {
+            
             var newArticle = await _nytService.GetCurrentArticles();
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = _context.UserModels.Where(c => c.IdentityUserId ==
@@ -40,6 +41,8 @@ namespace Nicholas_E_Terry_CapStone.Controllers
                 cleaned.Add(newCleanedArticle);
                 cleaned[i].Lead_paragraph = item.snippet;
                 cleaned[i].Web_url = item.web_url;
+               var tempResults = await Scrapper.GetHtmlAsString(cleaned[i].Web_url) ;
+                cleaned[i].Word_count = tempResults ;
                 i++;
             }
             var applicationDbContext = _context.UserModels.Include(u => u.Education).Include(u => u.Occupation).Include(u => u.Rank).Include(u => u.UserModelAddress).Include(u => u.UserNameModel);

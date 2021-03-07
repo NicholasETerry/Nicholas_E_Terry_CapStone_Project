@@ -32,6 +32,10 @@
             </div>
             <div class="jumbotron">
                 <p class="lead">@item.Lead_paragraph</p>
+                <details>
+                    <summary>Click To Read Article</summary>
+                    <p @*class="lead"*@>@item.Word_count</p>
+                </details>
                 <hr class="my-4">
                 <p class="lead">
                     <a class="btn btn-primary btn-lg" href=@item.Web_url role="button">Read Article</a>
