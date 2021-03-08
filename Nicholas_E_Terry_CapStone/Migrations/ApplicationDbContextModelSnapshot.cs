@@ -48,15 +48,15 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "45db6adc-825f-4e62-8556-f885e5f592c7",
-                            ConcurrencyStamp = "990b4b51-1b81-46cf-9ef1-4a5ea9192949",
+                            Id = "df994ff6-3c1e-4dc9-993f-fe02fcd5e7fe",
+                            ConcurrencyStamp = "8c52c1cf-1e17-4be3-8203-b90d80f45af5",
                             Name = "Consumer",
                             NormalizedName = "CONSUMER"
                         },
                         new
                         {
-                            Id = "9ab8fa73-8883-4251-9d5f-d68249995f4e",
-                            ConcurrencyStamp = "05053dd1-44a8-4615-9b59-0dbe9c9c45e5",
+                            Id = "acff8419-a76a-40a8-b74b-35e97b99fde1",
+                            ConcurrencyStamp = "112d5e29-628c-44ea-8e6c-3753fed8a04c",
                             Name = "Contributor",
                             NormalizedName = "CONTRIBUTOR"
                         });
@@ -262,8 +262,11 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ArticleAuthorId")
+                    b.Property<int?>("ArticleAuthorId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Article_filepath")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Lead_paragraph")
                         .HasColumnType("nvarchar(max)");
@@ -277,7 +280,7 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                     b.Property<string>("Source")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserSuggestedArticleAttributesId")
+                    b.Property<int?>("UserSuggestedArticleAttributesId")
                         .HasColumnType("int");
 
                     b.Property<string>("Web_url")
@@ -308,6 +311,38 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Education");
+                });
+
+            modelBuilder.Entity("Nicholas_E_Terry_CapStone.Models.HighLight", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("End_highlight")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HighLights_CleanArticle_Id")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Highlights_Clean_ArticleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Start_highlight")
+                        .HasColumnType("int");
+
+                    b.Property<string>("comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("highlight_color")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Highlights_Clean_ArticleId");
+
+                    b.ToTable("Highlights");
                 });
 
             modelBuilder.Entity("Nicholas_E_Terry_CapStone.Models.Hobby", b =>
@@ -399,7 +434,7 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                     b.Property<string>("Skill_user")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserModelId")
+                    b.Property<int?>("UserModelId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -407,6 +442,33 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                     b.HasIndex("UserModelId");
 
                     b.ToTable("Skills");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Skill_user = "Public Speaking"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Skill_user = "Writting"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Skill_user = "Self Management"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Skill_user = "Networking"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Skill_user = "Critical Thinking"
+                        });
                 });
 
             modelBuilder.Entity("Nicholas_E_Terry_CapStone.Models.UserModel", b =>
@@ -416,12 +478,8 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("EducationId")
+                    b.Property<int?>("EducationId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Email_address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("First_name")
                         .IsRequired()
@@ -434,16 +492,16 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OccupationId")
+                    b.Property<int?>("OccupationId")
                         .HasColumnType("int");
 
-                    b.Property<int>("RankId")
+                    b.Property<int?>("RankId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserAddressId")
+                    b.Property<int?>("UserAddressId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserNameId")
+                    b.Property<int?>("UserNameId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -605,15 +663,18 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                 {
                     b.HasOne("Nicholas_E_Terry_CapStone.Models.ArticleAuthor", "ArticleAuthor")
                         .WithMany()
-                        .HasForeignKey("ArticleAuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ArticleAuthorId");
 
                     b.HasOne("Nicholas_E_Terry_CapStone.Models.UserSuggestedArticleAttribute", "UserSuggestedArticleAttributes")
                         .WithMany()
-                        .HasForeignKey("UserSuggestedArticleAttributesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserSuggestedArticleAttributesId");
+                });
+
+            modelBuilder.Entity("Nicholas_E_Terry_CapStone.Models.HighLight", b =>
+                {
+                    b.HasOne("Nicholas_E_Terry_CapStone.Models.CleanArticle", "Highlights_Clean_Article")
+                        .WithMany()
+                        .HasForeignKey("Highlights_Clean_ArticleId");
                 });
 
             modelBuilder.Entity("Nicholas_E_Terry_CapStone.Models.Hobby", b =>
@@ -638,18 +699,14 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                 {
                     b.HasOne("Nicholas_E_Terry_CapStone.Models.UserModel", "UserModel")
                         .WithMany()
-                        .HasForeignKey("UserModelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserModelId");
                 });
 
             modelBuilder.Entity("Nicholas_E_Terry_CapStone.Models.UserModel", b =>
                 {
                     b.HasOne("Nicholas_E_Terry_CapStone.Models.Education", "Education")
                         .WithMany()
-                        .HasForeignKey("EducationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EducationId");
 
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()
@@ -657,27 +714,19 @@ namespace Nicholas_E_Terry_CapStone.Migrations
 
                     b.HasOne("Nicholas_E_Terry_CapStone.Models.Occupation", "Occupation")
                         .WithMany()
-                        .HasForeignKey("OccupationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OccupationId");
 
                     b.HasOne("Nicholas_E_Terry_CapStone.Models.Rank", "Rank")
                         .WithMany()
-                        .HasForeignKey("RankId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RankId");
 
                     b.HasOne("Nicholas_E_Terry_CapStone.Models.UserModelAddress", "UserModelAddress")
                         .WithMany()
-                        .HasForeignKey("UserAddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserAddressId");
 
                     b.HasOne("Nicholas_E_Terry_CapStone.Models.UserNameModel", "UserNameModel")
                         .WithMany()
-                        .HasForeignKey("UserNameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserNameId");
                 });
 
             modelBuilder.Entity("Nicholas_E_Terry_CapStone.Models.UserSuggestedArticleAttribute", b =>

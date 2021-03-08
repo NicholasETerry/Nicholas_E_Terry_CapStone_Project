@@ -24,33 +24,21 @@
                 <span asp-validation-for="Last_name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Email_address" class="control-label"></label>
-                <input asp-for="Email_address" class="form-control" />
-                <span asp-validation-for="Email_address" class="text-danger"></span>
+                <label asp-for="Education.Highest_level" class="control-label"></label>
+                <input asp-for="Education.Highest_level" class="form-control" />
+                <span asp-validation-for="Education.Highest_level" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="UserAddressId" class="control-label"></label>
-                <select asp-for="UserAddressId" class ="form-control" asp-items="ViewBag.UserAddressId"></select>
+                <label asp-for="Occupation.Occupation_user" class="control-label"></label>
+                <input asp-for="Occupation.Occupation_user" class="form-control" />
+                <span asp-validation-for="Occupation.Occupation_user" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="OccupationId" class="control-label"></label>
-                <select asp-for="OccupationId" class ="form-control" asp-items="ViewBag.OccupationId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="EducationId" class="control-label"></label>
-                <select asp-for="EducationId" class ="form-control" asp-items="ViewBag.EducationId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserNameId" class="control-label"></label>
-                <select asp-for="UserNameId" class ="form-control" asp-items="ViewBag.UserNameId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="RankId" class="control-label"></label>
-                <select asp-for="RankId" class ="form-control" asp-items="ViewBag.RankId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdentityUserId" class="control-label"></label>
-                <select asp-for="IdentityUserId" class ="form-control" asp-items="ViewBag.IdentityUserId"></select>
+            <div>
+                @foreach (var item in (List<string>)ViewData["SkillLibrary"])
+
+                {
+                    <button type="button" class="btn btn-outline-primary">@item</button>
+                }
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

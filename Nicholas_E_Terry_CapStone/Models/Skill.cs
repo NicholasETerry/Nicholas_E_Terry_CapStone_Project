@@ -13,7 +13,7 @@ namespace Nicholas_E_Terry_CapStone.Models
         public string Skill_level { get; set; }
 
         [ForeignKey("UserModel")]
-        public int UserModelId { get; set; }
+        public int? UserModelId { get; set; }
         public UserModel UserModel { get; set; }
     }
 }

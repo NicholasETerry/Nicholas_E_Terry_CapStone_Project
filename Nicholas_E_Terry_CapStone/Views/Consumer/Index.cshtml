@@ -13,11 +13,12 @@
 <!-- The sidebar -->
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <button type="button" class="btn btn-primary btn-lg btn-block">Upgrade To Contributor Level</button>
-    <a href="#">About</a>
-    <a href="#">Services</a>
-    <a href="#">Clients</a>
-    <a href="#">Contact</a>
+    @*<button type="button" class="btn btn-primary btn-lg btn-block">Upgrade To Contributor Level</button>*@
+    <a asp-controller="Contributor" asp-action="Create">Upgrade To Contributor Level</a>
+    <a href="#">BREAKING NEWS!</a>
+    <a href="#">Placeholder</a>
+    <a href="#">placeholder</a>
+    <a href="#">ABOUT</a>
 </div>
 <!-- Use any element to open the sidenav -->
 <button type="button" class="btn btn-outline-primary" onclick="openNav()">&#9776;</button>
@@ -45,77 +46,6 @@
     }
 </div>
 
-
-
-
-
-    @*<table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Lead_paragraph)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Source)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Word_count)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Web_url)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Pub_date)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.News_desk)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ArticleAuthor)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.UserSuggestedArticleAttributes)
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Lead_paragraph)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Web_url)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Source)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Word_count)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Web_url)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Pub_date)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.News_desk)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ArticleAuthor.Id)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.UserSuggestedArticleAttributes.Id)
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>*@
+@*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+<a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@

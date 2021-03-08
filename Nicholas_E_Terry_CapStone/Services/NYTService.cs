@@ -10,15 +10,18 @@ namespace Nicholas_E_Terry_CapStone.Services
 {
     public class NYTService
     {
-        public NYTService()
-        {
+        private string _apiKey;
 
+        private HttpClient _httpClient;
+        public NYTService(string apiKey, HttpClient httpClient)
+        {
+            _apiKey = apiKey;
+            _httpClient = httpClient;
         }
 
         public async Task <Article> GetCurrentArticles()
         {
-            HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync($"https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key={APIKeys.NewYorkTimesKey}");
+            HttpResponseMessage response = await _httpClient.GetAsync($"svc/search/v2/articlesearch.json?api-key={_apiKey}");
             if (response.IsSuccessStatusCode)
             {
                 string json = await response.Content.ReadAsStringAsync();

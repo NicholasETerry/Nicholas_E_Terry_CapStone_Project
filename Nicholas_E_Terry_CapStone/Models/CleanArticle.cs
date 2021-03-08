@@ -17,13 +17,14 @@ namespace Nicholas_E_Terry_CapStone.Models
         public string Web_url { get; set; }
         public string Pub_date { get; set; }
         public string News_desk { get; set; }
+        public string Article_filepath { get; set; }
 
         [ForeignKey("ArticleAuthor")]
-        public int ArticleAuthorId { get; set; }
+        public int? ArticleAuthorId { get; set; }
         public ArticleAuthor ArticleAuthor { get; set; }
 
         [ForeignKey("UserSuggestedArticleAttributes")]
-        public int UserSuggestedArticleAttributesId { get; set; }
+        public int? UserSuggestedArticleAttributesId { get; set; }
         public UserSuggestedArticleAttribute UserSuggestedArticleAttributes { get; set; }
     }
 }

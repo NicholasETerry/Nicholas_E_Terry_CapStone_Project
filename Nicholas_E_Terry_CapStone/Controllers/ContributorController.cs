@@ -22,10 +22,10 @@ namespace Nicholas_E_Terry_CapStone.Controllers
         // GET: Contributor
         public async Task<IActionResult> Index()
         {
-            var contributor = _context.UserModels.Include(u => u.Education).Include(u => u.IdentityUser).Include(u => u.Occupation).Include(u => u.Rank).Include(u => u.UserModelAddress).Include(u => u.UserNameModel);
+           
            // UserModel newModel = new UserModel();
            // newModel.UserModelAddress.City
-            return View(await contributor.ToListAsync());
+            return View(/*await contributor.ToListAsync()*/);
         }
 
         // GET: Contributor/Details/5
@@ -55,12 +55,9 @@ namespace Nicholas_E_Terry_CapStone.Controllers
         // GET: Contributor/Create
         public IActionResult Create()
         {
-            ViewData["EducationId"] = new SelectList(_context.Education, "Id", "Id");
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
-            ViewData["OccupationId"] = new SelectList(_context.Occupations, "Id", "Id");
-            ViewData["RankId"] = new SelectList(_context.Rankings, "Id", "Id");
-            ViewData["UserAddressId"] = new SelectList(_context.UserModelAddresses, "Id", "Id");
-            ViewData["UserNameId"] = new SelectList(_context.UserNamesModel, "Id", "Id");
+            SkillLibrary newSkillLibrary = new SkillLibrary();
+
+            ViewData["SkillLibrary"] = newSkillLibrary.skillLibrary;
             return View();
         }
 
@@ -69,7 +66,7 @@ namespace Nicholas_E_Terry_CapStone.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,First_name,Last_name,Email_address,UserAddressId,OccupationId,EducationId,UserNameId,RankId,IdentityUserId")] UserModel userModel)
+        public async Task<IActionResult> Create([Bind("Id,First_name,Last_name,Email_address,UserAddress,Occupation,Education,UserName,IdentityUser,SkillLibrary")] UserModel userModel)
         {
             if (ModelState.IsValid)
             {
@@ -77,12 +74,6 @@ namespace Nicholas_E_Terry_CapStone.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EducationId"] = new SelectList(_context.Education, "Id", "Id", userModel.EducationId);
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", userModel.IdentityUserId);
-            ViewData["OccupationId"] = new SelectList(_context.Occupations, "Id", "Id", userModel.OccupationId);
-            ViewData["RankId"] = new SelectList(_context.Rankings, "Id", "Id", userModel.RankId);
-            ViewData["UserAddressId"] = new SelectList(_context.UserModelAddresses, "Id", "Id", userModel.UserAddressId);
-            ViewData["UserNameId"] = new SelectList(_context.UserNamesModel, "Id", "Id", userModel.UserNameId);
             return View(userModel);
         }
 

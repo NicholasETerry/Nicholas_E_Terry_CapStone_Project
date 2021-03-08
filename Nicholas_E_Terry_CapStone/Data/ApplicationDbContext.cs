@@ -25,6 +25,7 @@ namespace Nicholas_E_Terry_CapStone.Data
         public DbSet<Hobby> Hobbies { get; set; }
         public DbSet<UserNameModel> UserNamesModel { get; set; }
         public DbSet<Rank> Rankings { get; set; }
+        public DbSet<HighLight> Highlights { get; set; } 
 
         // Article relasted information
 
@@ -42,14 +43,13 @@ namespace Nicholas_E_Terry_CapStone.Data
                     Name = "Consumer",
                     NormalizedName = "CONSUMER"
                 }
+                ,
+                new IdentityRole
+                {
+                    Name = "Contributor",
+                    NormalizedName = "CONTRIBUTOR"
+                }
                 );
-            builder.Entity<IdentityRole>().HasData(
-            new IdentityRole
-            {
-                Name = "Contributor",
-                NormalizedName = "CONTRIBUTOR"
-            }
-            );
         }
     }
 }

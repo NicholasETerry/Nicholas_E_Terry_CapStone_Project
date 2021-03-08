@@ -27,26 +27,32 @@ namespace Nicholas_E_Terry_CapStone.Controllers
         // GET: Consumer
         public async Task<IActionResult> Index()
         {
-            
-            var newArticle = await _nytService.GetCurrentArticles();
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = _context.UserModels.Where(c => c.IdentityUserId ==
             userId).SingleOrDefault();
-            List<CleanArticle> cleaned = new List<CleanArticle>();
+            if(user == null)
+            {              
+                var newArticle = await _nytService.GetCurrentArticles();
+                List<CleanArticle> cleaned = new List<CleanArticle>();
           
-            int i = 0;
-            foreach (var item in newArticle.response.docs)
-            {
-                CleanArticle newCleanedArticle = new CleanArticle();
-                cleaned.Add(newCleanedArticle);
-                cleaned[i].Lead_paragraph = item.snippet;
-                cleaned[i].Web_url = item.web_url;
-               var tempResults = await Scrapper.GetHtmlAsString(cleaned[i].Web_url) ;
-                cleaned[i].Word_count = tempResults ;
-                i++;
+                int i = 0;
+                foreach (var item in newArticle.response.docs)
+                {
+                    CleanArticle newCleanedArticle = new CleanArticle();
+                    cleaned.Add(newCleanedArticle);
+                    cleaned[i].Lead_paragraph = item.snippet;
+                    cleaned[i].Web_url = item.web_url;
+                   var tempResults = await Scrapper.GetHtmlAsString(cleaned[i].Web_url) ; //just to test the scrapper
+                    cleaned[i].Word_count = tempResults ;
+                    i++;
+                }
+                var applicationDbContext = _context.UserModels.Include(u => u.Education).Include(u => u.Occupation).Include(u => u.Rank).Include(u => u.UserModelAddress).Include(u => u.UserNameModel);
+                return View(cleaned/*await applicationDbContext.ToListAsync()*/);
             }
-            var applicationDbContext = _context.UserModels.Include(u => u.Education).Include(u => u.Occupation).Include(u => u.Rank).Include(u => u.UserModelAddress).Include(u => u.UserNameModel);
-            return View(cleaned/*await applicationDbContext.ToListAsync()*/);
+            else
+            {
+                return RedirectToAction("Index", "Contributor", new { area = "Contributor" });
+            }
         }
         // GET: Consumer/Delete/5
         public async Task<IActionResult> Delete(int? id)

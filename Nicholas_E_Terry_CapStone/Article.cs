@@ -7,23 +7,23 @@ namespace Nicholas_E_Terry_CapStone
 {
     public class Article
     {
-        public string status { get; set; }
-        public string copyright { get; set; }
+        //public string status { get; set; }
+        //public string copyright { get; set; }
         public Response response { get; set; }
     }
 
     public class Response
     {
         public Doc[] docs { get; set; }
-        public Meta meta { get; set; }
+        //public Meta meta { get; set; }
     }
 
-    public class Meta
-    {
-        public int hits { get; set; }
-        public int offset { get; set; }
-        public int time { get; set; }
-    }
+    //public class Meta
+    //{
+    //    public int hits { get; set; }
+    //    public int offset { get; set; }
+    //    public int time { get; set; }
+    //}
 
     public class Doc
     {
@@ -32,7 +32,7 @@ namespace Nicholas_E_Terry_CapStone
         public string snippet { get; set; }
         public string lead_paragraph { get; set; }
         public string source { get; set; }
-        public Multimedia[] multimedia { get; set; }
+        //public Multimedia[] multimedia { get; set; }
         public Headline headline { get; set; }
         public Keyword[] keywords { get; set; }
         public DateTime pub_date { get; set; }
@@ -76,20 +76,20 @@ namespace Nicholas_E_Terry_CapStone
         public int rank { get; set; }
     }
 
-    public class Multimedia
-    {
-        public int rank { get; set; }
-        public string subtype { get; set; }
-        public object caption { get; set; }
-        public object credit { get; set; }
-        public string type { get; set; }
-        public string url { get; set; }
-        public int height { get; set; }
-        public int width { get; set; }
-        public Legacy legacy { get; set; }
-        public string subType { get; set; }
-        public string crop_name { get; set; }
-    }
+    //public class Multimedia
+    //{
+    //    public int rank { get; set; }
+    //    public string subtype { get; set; }
+    //    public object caption { get; set; }
+    //    public object credit { get; set; }
+    //    public string type { get; set; }
+    //    public string url { get; set; }
+    //    public int height { get; set; }
+    //    public int width { get; set; }
+    //    public Legacy legacy { get; set; }
+    //    public string subType { get; set; }
+    //    public string crop_name { get; set; }
+    //}
 
     public class Legacy
     {

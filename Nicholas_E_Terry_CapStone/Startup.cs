@@ -45,7 +45,7 @@ namespace Nicholas_E_Terry_CapStone
 
             services.AddControllersWithViews();
             services.AddRazorPages();
-            services.AddTransient<NYTService>();
+            services.AddTransient(x => new NYTService(Configuration["NewYorkTimesApiKey"], new System.Net.Http.HttpClient { BaseAddress = new Uri("https://api.nytimes.com") }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

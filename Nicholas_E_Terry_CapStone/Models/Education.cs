@@ -10,6 +10,7 @@ namespace Nicholas_E_Terry_CapStone.Models
     {
         [Key]
         public int Id { get; set; }
+        [Display(Name = "Highest Education Level")]
         public string Highest_level { get; set; }
     }
 }
