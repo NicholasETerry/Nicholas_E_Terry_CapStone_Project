@@ -48,15 +48,15 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "df994ff6-3c1e-4dc9-993f-fe02fcd5e7fe",
-                            ConcurrencyStamp = "8c52c1cf-1e17-4be3-8203-b90d80f45af5",
+                            Id = "9537a3ba-bb2a-40cb-aa43-e50d334a6b0f",
+                            ConcurrencyStamp = "b9739fd5-ef54-4ffe-b62f-fa38687aced5",
                             Name = "Consumer",
                             NormalizedName = "CONSUMER"
                         },
                         new
                         {
-                            Id = "acff8419-a76a-40a8-b74b-35e97b99fde1",
-                            ConcurrencyStamp = "112d5e29-628c-44ea-8e6c-3753fed8a04c",
+                            Id = "2432f929-e4a7-4e78-a70f-7e5a5244265c",
+                            ConcurrencyStamp = "aafb7ace-e3b7-42b0-bf5b-57daf8209189",
                             Name = "Contributor",
                             NormalizedName = "CONTRIBUTOR"
                         });
@@ -428,10 +428,7 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Skill_level")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Skill_user")
+                    b.Property<string>("SKill")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("UserModelId")
@@ -442,33 +439,6 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                     b.HasIndex("UserModelId");
 
                     b.ToTable("Skills");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Skill_user = "Public Speaking"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Skill_user = "Writting"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Skill_user = "Self Management"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Skill_user = "Networking"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Skill_user = "Critical Thinking"
-                        });
                 });
 
             modelBuilder.Entity("Nicholas_E_Terry_CapStone.Models.UserModel", b =>

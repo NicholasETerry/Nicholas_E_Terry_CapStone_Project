@@ -91,18 +91,18 @@ namespace Nicholas_E_Terry_CapStone
     //    public string crop_name { get; set; }
     //}
 
-    public class Legacy
-    {
-        public string xlarge { get; set; }
-        public int xlargewidth { get; set; }
-        public int xlargeheight { get; set; }
-        public string thumbnail { get; set; }
-        public int thumbnailwidth { get; set; }
-        public int thumbnailheight { get; set; }
-        public int widewidth { get; set; }
-        public int wideheight { get; set; }
-        public string wide { get; set; }
-    }
+    //public class Legacy
+    //{
+    //    public string xlarge { get; set; }
+    //    public int xlargewidth { get; set; }
+    //    public int xlargeheight { get; set; }
+    //    public string thumbnail { get; set; }
+    //    public int thumbnailwidth { get; set; }
+    //    public int thumbnailheight { get; set; }
+    //    public int widewidth { get; set; }
+    //    public int wideheight { get; set; }
+    //    public string wide { get; set; }
+    //}
 
     public class Keyword
     {

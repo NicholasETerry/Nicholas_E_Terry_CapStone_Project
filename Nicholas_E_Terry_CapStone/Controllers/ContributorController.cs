@@ -1,31 +1,57 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Nicholas_E_Terry_CapStone.Data;
 using Nicholas_E_Terry_CapStone.Models;
+using Nicholas_E_Terry_CapStone.Services;
 
 namespace Nicholas_E_Terry_CapStone.Controllers
 {
     public class ContributorController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly NYTService _nytService;
 
-        public ContributorController(ApplicationDbContext context)
+        public ContributorController(ApplicationDbContext context, NYTService nytService)
         {
             _context = context;
+            _nytService = nytService;
         }
 
         // GET: Contributor
         public async Task<IActionResult> Index()
         {
-           
-           // UserModel newModel = new UserModel();
-           // newModel.UserModelAddress.City
-            return View(/*await contributor.ToListAsync()*/);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user =  _context.UserModels.Where(c => c.IdentityUserId ==
+            userId).SingleOrDefault();
+            if (user == null)
+            {
+                return RedirectToAction(nameof(Create));
+            }
+            else
+            {
+                var newArticle = await _nytService.GetCurrentArticles();
+                List<CleanArticle> cleaned = new List<CleanArticle>();
+
+                int i = 0;
+                foreach (var item in newArticle.response.docs)
+                {
+                    CleanArticle newCleanedArticle = new CleanArticle();
+                    cleaned.Add(newCleanedArticle);
+                    cleaned[i].Lead_paragraph = item.snippet;
+                    cleaned[i].Web_url = item.web_url;
+                    var tempResults = await Scrapper.GetHtmlAsString(cleaned[i].Web_url); //just to test the scrapper
+                    cleaned[i].Word_count = tempResults;
+                    i++;
+                }
+                var applicationDbContext = _context.UserModels.Include(u => u.Education).Include(u => u.Occupation).Include(u => u.Rank).Include(u => u.UserModelAddress).Include(u => u.UserNameModel);
+                return View(cleaned/*await applicationDbContext.ToListAsync()*/);
+            }
         }
 
         // GET: Contributor/Details/5
@@ -56,8 +82,12 @@ namespace Nicholas_E_Terry_CapStone.Controllers
         public IActionResult Create()
         {
             SkillLibrary newSkillLibrary = new SkillLibrary();
+            OccupationLibrary newOccupationLibrary = new OccupationLibrary();
+            HobbyLibrary newHobbyLibrary = new HobbyLibrary();
 
             ViewData["SkillLibrary"] = newSkillLibrary.skillLibrary;
+            ViewData["OccupationLibrary"] = newOccupationLibrary.OccupationLibrary;
+            ViewData["HobbyLibrary"] = newHobbyLibrary.HobbyLibrary;
             return View();
         }
 
@@ -66,10 +96,13 @@ namespace Nicholas_E_Terry_CapStone.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,First_name,Last_name,Email_address,UserAddress,Occupation,Education,UserName,IdentityUser,SkillLibrary")] UserModel userModel)
+        public async Task<IActionResult> Create([Bind("Id,First_name,Last_name,Email_address,UserAddress,Occupation,Education,UserName,IdentityUserId,IdentityUser,SkillLibrary")] UserModel userModel,List<string> userSkills)
         {
+            
             if (ModelState.IsValid)
             {
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                userModel.IdentityUserId = userId;
                 _context.Add(userModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

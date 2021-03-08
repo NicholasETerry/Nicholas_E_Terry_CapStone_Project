@@ -24,9 +24,34 @@
                 <span asp-validation-for="Last_name" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="UserModelAddress.Street_address" class="control-label"></label>
+                <input asp-for="UserModelAddress.Street_address" class="form-control" />
+                <span asp-validation-for="UserModelAddress.Street_address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserModelAddress.City" class="control-label"></label>
+                <input asp-for="UserModelAddress.City" class="form-control" />
+                <span asp-validation-for="UserModelAddress.City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserModelAddress.State" class="control-label"></label>
+                <input asp-for="UserModelAddress.State" class="form-control" />
+                <span asp-validation-for="UserModelAddress.State" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserModelAddress.Zip_code" class="control-label"></label>
+                <input asp-for="UserModelAddress.Zip_code" class="form-control" />
+                <span asp-validation-for="UserModelAddress.Zip_code" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Education.Highest_level" class="control-label"></label>
                 <input asp-for="Education.Highest_level" class="form-control" />
                 <span asp-validation-for="Education.Highest_level" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Occupation.Occupation_user" class="control-label"></label>
+                <input asp-for="Occupation.Occupation_user" class="form-control" />
+                <span asp-validation-for="Occupation.Occupation_user" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Occupation.Occupation_user" class="control-label"></label>
