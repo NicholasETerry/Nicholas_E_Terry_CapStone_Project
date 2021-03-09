@@ -7,10 +7,10 @@ namespace Nicholas_E_Terry_CapStone.Models
 {
     public class HobbyLibrary
     {
-        public List<string> HobbyLibrary;
+        public List<string> hobbyLibrary;
         public HobbyLibrary()
         {
-            HobbyLibrary = new List<string>
+            hobbyLibrary = new List<string>
             {
                 "Golf",
                 "Painting",

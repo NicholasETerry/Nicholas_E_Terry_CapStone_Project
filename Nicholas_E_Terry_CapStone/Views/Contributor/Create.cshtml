@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml"; 
 }
 
 <h1>Create</h1>
@@ -22,6 +22,11 @@
                 <label asp-for="Last_name" class="control-label"></label>
                 <input asp-for="Last_name" class="form-control" />
                 <span asp-validation-for="Last_name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserNameModel.User_name" class="control-label"></label>
+                <input asp-for="UserNameModel.User_name" class="form-control" />
+                <span asp-validation-for="UserNameModel.User_name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="UserModelAddress.Street_address" class="control-label"></label>
@@ -59,11 +64,14 @@
                 <span asp-validation-for="Occupation.Occupation_user" class="text-danger"></span>
             </div>
             <div>
-                @foreach (var item in (List<string>)ViewData["SkillLibrary"])
-
-                {
-                    <button type="button" class="btn btn-outline-primary">@item</button>
-                }
+                <label asp-for="Skills"></label>
+                <select asp-for="Skills" multiple="multiple">
+                    @foreach (var item in (List<string>)ViewBag.SkillLibrary )
+                    {
+                        <option value="@item">@item</option>
+                    }
+                    
+                </select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

@@ -47,5 +47,11 @@ namespace Nicholas_E_Terry_CapStone.Models
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }
         public IdentityUser IdentityUser { get; set; }
+        [NotMapped]
+        public List<string> Skills { get; set; }
+        [NotMapped]
+        public List<string> Hobbies { get; set; }
+        [NotMapped]
+        public List<string> Previous_Occupations { get; set; }
     }
 }

@@ -82,13 +82,9 @@ namespace Nicholas_E_Terry_CapStone.Controllers
         public IActionResult Create()
         {
             SkillLibrary newSkillLibrary = new SkillLibrary();
-            OccupationLibrary newOccupationLibrary = new OccupationLibrary();
-            HobbyLibrary newHobbyLibrary = new HobbyLibrary();
-
             ViewData["SkillLibrary"] = newSkillLibrary.skillLibrary;
-            ViewData["OccupationLibrary"] = newOccupationLibrary.OccupationLibrary;
-            ViewData["HobbyLibrary"] = newHobbyLibrary.HobbyLibrary;
-            return View();
+            var mview = new UserModel {First_name = "test", Last_name = "last Name"}; // for testing only
+            return View(mview);
         }
 
         // POST: Contributor/Create
@@ -96,18 +92,59 @@ namespace Nicholas_E_Terry_CapStone.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,First_name,Last_name,Email_address,UserAddress,Occupation,Education,UserName,IdentityUserId,IdentityUser,SkillLibrary")] UserModel userModel,List<string> userSkills)
+        public async Task<IActionResult> Create(  UserModel userModel)
         {
-            
+             
             if (ModelState.IsValid)
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 userModel.IdentityUserId = userId;
                 _context.Add(userModel);
                 await _context.SaveChangesAsync();
+
+                foreach (var item in userModel.Skills)
+                {
+                    var newSkill = new Skill
+                    {
+                        UserModelId = userModel.Id,
+                        SKill = item
+                    };
+                    _context.Add(newSkill);
+                }
+
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(userModel);
+        }
+        public IActionResult Skill()
+        {
+            SkillLibrary newSkillLibrary = new SkillLibrary();
+            //OccupationLibrary newOccupationLibrary = new OccupationLibrary();
+            //HobbyLibrary newHobbyLibrary = new HobbyLibrary();
+
+            ViewData["SkillLibrary"] = newSkillLibrary.skillLibrary;
+            //ViewData["OccupationLibrary"] = newOccupationLibrary.occupationLibrary;
+            //ViewData["HobbyLibrary"] = newHobbyLibrary.hobbyLibrary;
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Skill([Bind("SkillLibrary")] List<string> returnList)
+        {
+            List<Skill> userSkills = new List<Skill>();
+            Skill newSkill = new Skill();
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = _context.UserModels.Where(c => c.IdentityUserId ==
+            userId).SingleOrDefault();
+            foreach (var item in returnList)
+            {
+                newSkill.SKill = item;
+                newSkill.UserModelId = user.Id;
+                _context.Add(newSkill);
+            }
+            await _context.SaveChangesAsync();
+
+            return View(returnList);
         }
 
         // GET: Contributor/Edit/5

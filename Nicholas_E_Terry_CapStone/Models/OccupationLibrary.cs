@@ -7,10 +7,10 @@ namespace Nicholas_E_Terry_CapStone.Models
 {
     public class OccupationLibrary
     {
-        public List<string> OccupationLibrary;
+        public List<string> occupationLibrary;
         public OccupationLibrary()
         {
-            OccupationLibrary = new List<string>
+            occupationLibrary = new List<string>
                 {
                     "Factory Worker",
                     "Lawyer",
