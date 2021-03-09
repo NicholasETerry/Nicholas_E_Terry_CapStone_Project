@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Nicholas_E_Terry_CapStone.Models
 {
-    public class PreviousOccupation
+    public class Comment
     {
         [Key]
         public int Id { get; set; }
-        public string Previous_occupation { get; set; }
+        public string comment { get; set; }
 
         [ForeignKey("UserModel")]
-        public int UserModelId { get; set; }
-        public UserModel UserModel { get; set; }
+        public int? Comment_UserModel_Id { get; set; }
+        public UserModel Comment_UserModel { get; set; }
     }
 }

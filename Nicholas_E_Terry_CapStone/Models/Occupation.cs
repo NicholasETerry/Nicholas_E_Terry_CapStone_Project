@@ -12,6 +12,5 @@ namespace Nicholas_E_Terry_CapStone.Models
         public int Id { get; set; }
         [Display(Name ="Occupation")]
         public string Occupation_user { get; set; }
-        public string Experience { get; set; }
     }
 }

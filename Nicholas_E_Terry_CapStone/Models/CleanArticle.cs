@@ -26,5 +26,8 @@ namespace Nicholas_E_Terry_CapStone.Models
         [ForeignKey("UserSuggestedArticleAttributes")]
         public int? UserSuggestedArticleAttributesId { get; set; }
         public UserSuggestedArticleAttribute UserSuggestedArticleAttributes { get; set; }
+
+        [NotMapped]
+        public List<Comment> CommentList { get; set; }
     }
 }

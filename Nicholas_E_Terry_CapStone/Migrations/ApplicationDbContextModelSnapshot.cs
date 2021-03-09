@@ -48,15 +48,15 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9537a3ba-bb2a-40cb-aa43-e50d334a6b0f",
-                            ConcurrencyStamp = "b9739fd5-ef54-4ffe-b62f-fa38687aced5",
+                            Id = "17ed7d72-8df7-4031-b4b0-6e34b6fa793b",
+                            ConcurrencyStamp = "bfef376d-e0ff-4094-9ee2-ffdc4b62e156",
                             Name = "Consumer",
                             NormalizedName = "CONSUMER"
                         },
                         new
                         {
-                            Id = "2432f929-e4a7-4e78-a70f-7e5a5244265c",
-                            ConcurrencyStamp = "aafb7ace-e3b7-42b0-bf5b-57daf8209189",
+                            Id = "0260e2a0-fd20-4fd4-b6a4-6ea23a6b09f4",
+                            ConcurrencyStamp = "4dbe0425-bd1e-4c64-abb3-f69286fea170",
                             Name = "Contributor",
                             NormalizedName = "CONTRIBUTOR"
                         });
@@ -395,9 +395,6 @@ namespace Nicholas_E_Terry_CapStone.Migrations
 
                     b.Property<int>("UserModelId")
                         .HasColumnType("int");
-
-                    b.Property<string>("experience")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

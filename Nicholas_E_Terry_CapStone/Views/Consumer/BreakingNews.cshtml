@@ -1,21 +1,23 @@
 ﻿@model IEnumerable<Nicholas_E_Terry_CapStone.Models.CleanArticle>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "BreakingNews";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@*<h1>Index</h1>
+<h1>BREAKING NEWS !</h1>
+<h4>“Caution! News travels fast and these Stories are just developing. Be objective, these stories are unlikely to have all the facts at this time.”</h4>
 
-    <p>
+    @*<p>
         <a asp-action="Create">Create New</a>
     </p>*@
 <!-- The sidebar -->
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-
-    <a href="#">BREAKING NEWS!</a>
-    <a href="#">REVIEW ARTICLES</a>
+    @*<button type="button" class="btn btn-primary btn-lg btn-block">Upgrade To Contributor Level</button>*@
+    <a asp-controller="Contributor" asp-action="Create">Upgrade To Contributor Level</a>
+    <a asp-controller="Consumer" asp-action="Index">Home</a>
+    <a href="#">Placeholder</a>
     <a href="#">placeholder</a>
     <a href="#">ABOUT</a>
 </div>
