@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 namespace Nicholas_E_Terry_CapStone.Models
 {
     
-    public class TestLibrary
+    public class ContributorTestLibrary
     {
-        public List<Test> NewTestLibrary;
-        public TestLibrary()
+        public List<ContributorTest> NewTestLibrary;
+        public ContributorTestLibrary()
         {
             NewTestLibrary = TestCreator();
         }
-        public List<Test> TestCreator()
+        public List<ContributorTest> TestCreator()
         {
-            List<Test> newTestList = new List<Test>();
+            List<ContributorTest> newTestList = new List<ContributorTest>();
 
-            Test newTestOne = new Test
+            ContributorTest newTestOne = new ContributorTest
             {
                 TestNumber = 1,
                 TestQuestion = "Correct the portion in Bold: The first time the United States imported more oil than it exported, Americans should have" +
@@ -29,7 +29,7 @@ namespace Nicholas_E_Terry_CapStone.Models
             };
             newTestList.Add(newTestOne);
 
-            Test newTestTwo = new Test
+            ContributorTest newTestTwo = new ContributorTest
             {
                 TestNumber = 2,
                 TestQuestion = "Correct the portion in bold: The dramatic monologue was one poetic form congenial to Rober Browning;" +
@@ -41,7 +41,7 @@ namespace Nicholas_E_Terry_CapStone.Models
             };
             newTestList.Add(newTestTwo);
 
-            Test newTestThree = new Test
+            ContributorTest newTestThree = new ContributorTest
             {
                 TestNumber = 3,
                 TestQuestion = "Correct the portion in bold: At the Constitutional Convention of 1787, the proposal to replace the existiong Articles of" +

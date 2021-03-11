@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Nicholas_E_Terry_CapStone.Models.ContributorTest>
+@{
+    ViewData["Title"] = "Test";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Test</h1>
+
+<form asp-action="ContributorTest">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        @foreach (var item in (List<ContributorTest>)ViewBag.ContributorTestLibrary)
+        {
+            <p>
+                Question # @item.TestNumber
+            </p>
+            <p>
+                @item.TestQuestion
+            </p>
+            <br />
+            <div>
+                <select multiple="multiple">
+                    {
+                    <option value="@item.IsCorrect">@item.IsCorrect</option>
+                    <option value="@item.IsWrongOne">@item.IsWrongOne</option>
+                    <option value="@item.IsWrongTwo">@item.IsWrongTwo</option>
+                    <option value="@item.IsWrongThree">@item.IsWrongThree</option>
+                    }
+
+                </select>
+            </div>
+
+        }
+    </div>
+    <div>
+        <input type="submit" value="Submit Answers" class="btn btn-primary" />
+    </div>
+</form>
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -92,8 +92,6 @@ namespace Nicholas_E_Terry_CapStone.Controllers
         }
 
         // POST: Contributor/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(  UserModel userModel)
@@ -134,10 +132,24 @@ namespace Nicholas_E_Terry_CapStone.Controllers
                     _context.Add(newOccupation);
                 }
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ContributorTest));
             }
             return View(userModel);
         }
+        public IActionResult ContributorTest()
+        {
+            ContributorTestLibrary contributorTestLibrary = new ContributorTestLibrary();
+            ViewData["ContributorTestLibrary"] = contributorTestLibrary.NewTestLibrary;
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> ContributorTest(List<ContributorTest> newTest) // returning nothing at this point.
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = _context.UserModels.Where(c => c.IdentityUserId == userId).FirstOrDefault();
+            return RedirectToAction(nameof(Index));
+        }
+
         // GET: Contributor/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

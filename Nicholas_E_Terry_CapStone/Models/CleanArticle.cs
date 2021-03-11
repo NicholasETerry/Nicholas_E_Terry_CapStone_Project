@@ -28,6 +28,6 @@ namespace Nicholas_E_Terry_CapStone.Models
         public UserSuggestedArticleAttribute UserSuggestedArticleAttributes { get; set; }
 
         [NotMapped]
-        public List<Comment> CommentList { get; set; }
+        public List<ConsumerComment> CommentList { get; set; }
     }
 }

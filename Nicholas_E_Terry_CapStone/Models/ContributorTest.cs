@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Nicholas_E_Terry_CapStone.Models
 {
-    public class Test
+    public class ContributorTest
     {
         [Key]
         public int Id { get; set; }
@@ -19,7 +19,7 @@ namespace Nicholas_E_Terry_CapStone.Models
         public string IsWrongThree { get; set; }
 
         [ForeignKey("UserModel")]
-        public int Test_UserModel_Id { get; set; }
-        public UserModel Test_UserModel { get; set; }
+        public int Contributor_Test_UserModel_Id { get; set; }
+        public UserModel Contributor_Test_UserModel { get; set; }
     }
 }
