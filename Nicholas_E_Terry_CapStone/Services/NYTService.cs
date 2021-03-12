@@ -21,6 +21,16 @@ namespace Nicholas_E_Terry_CapStone.Services
 
         public async Task <Article> GetCurrentArticles()
         {
+            HttpResponseMessage response = await _httpClient.GetAsync($"svc/search/v2/articlesearch.json?begin_date=19871229&end_date=19871229&api-key={_apiKey}");
+            if (response.IsSuccessStatusCode)
+            {
+                string json = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Article>(json);
+            }
+            return null;
+        }
+        public async Task<Article> GetBreakingArticles()
+        {
             HttpResponseMessage response = await _httpClient.GetAsync($"svc/search/v2/articlesearch.json?api-key={_apiKey}");
             if (response.IsSuccessStatusCode)
             {

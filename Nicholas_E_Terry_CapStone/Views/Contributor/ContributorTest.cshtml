@@ -19,7 +19,7 @@
             </p>
             <br />
             <div>
-                <select multiple="multiple">
+                <select asp-for="@item.PossibleAnswers" multiple="multiple">
                     {
                     <option value="@item.IsCorrect">@item.IsCorrect</option>
                     <option value="@item.IsWrongOne">@item.IsWrongOne</option>

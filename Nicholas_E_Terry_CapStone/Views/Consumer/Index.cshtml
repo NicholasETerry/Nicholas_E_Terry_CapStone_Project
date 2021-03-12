@@ -42,6 +42,16 @@
                     <a class="btn btn-primary btn-lg" href=@item.Web_url role="button">Read Article</a>
                 </p>
             </div>
+            <div>
+                    <form asp-for="@item.ConsumerComment">
+                        <label for="Suggestions">Suggestions:</label>
+                        <textarea id="Suggestions" name="Suggestions" rows="4" cols="50">
+                          Input Article Suggestions Here
+                         </textarea>
+                        <br><br>
+                        <input type="submit" value="Submit">
+                    </form>
+            </div>
         </div>
     }
 </div>

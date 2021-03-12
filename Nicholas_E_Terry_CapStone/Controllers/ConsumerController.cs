@@ -40,14 +40,13 @@ namespace Nicholas_E_Terry_CapStone.Controllers
                 {
                     CleanArticle newCleanedArticle = new CleanArticle();
                     cleaned.Add(newCleanedArticle);
-                    cleaned[i].Lead_paragraph = item.snippet;
+                    cleaned[i].Lead_paragraph = item.headline.main;
                     cleaned[i].Web_url = item.web_url;
                    var tempResults = await Scrapper.GetHtmlAsString(cleaned[i].Web_url) ; //just to test the scrapper
                     cleaned[i].Word_count = tempResults ;
                     i++;
                 }
-                var applicationDbContext = _context.UserModels.Include(u => u.Education).Include(u => u.Occupation).Include(u => u.Rank).Include(u => u.UserModelAddress).Include(u => u.UserNameModel);
-                return View(cleaned/*await applicationDbContext.ToListAsync()*/);
+                return View(cleaned);
             }
             else
             {
@@ -61,7 +60,7 @@ namespace Nicholas_E_Terry_CapStone.Controllers
             userId).FirstOrDefault();
             if (user == null)
             {
-                var newArticle = await _nytService.GetCurrentArticles();
+                var newArticle = await _nytService.GetBreakingArticles();
                 List<CleanArticle> cleaned = new List<CleanArticle>();
 
                 int i = 0;

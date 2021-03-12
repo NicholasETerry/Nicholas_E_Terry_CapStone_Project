@@ -21,5 +21,8 @@ namespace Nicholas_E_Terry_CapStone.Models
         [ForeignKey("UserModel")]
         public int Contributor_Test_UserModel_Id { get; set; }
         public UserModel Contributor_Test_UserModel { get; set; }
+        [NotMapped]
+        public List<string> PossibleAnswers { get; set; }
     }
+    
 }
