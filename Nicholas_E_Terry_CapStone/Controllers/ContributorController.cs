@@ -149,7 +149,30 @@ namespace Nicholas_E_Terry_CapStone.Controllers
             var user = _context.UserModels.Where(c => c.IdentityUserId == userId).FirstOrDefault();
             return RedirectToAction(nameof(Index));
         }
-
+        public IActionResult ArticleReview()
+        {
+            TagLibrary newTagLibrary = new TagLibrary();
+            ViewData["TagLibrary"] = newTagLibrary.tagLibrary;
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> ArticleReview(CleanArticle reviewedArticle)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = _context.UserModels.Where(c => c.IdentityUserId == userId).FirstOrDefault();
+            foreach (var item in reviewedArticle.ArticleTags)
+            {
+                var ArticleTags = new TagContributorSuggested
+                {
+                    UserId = user.Id,
+                    TagCleanArticleId = reviewedArticle.Id,
+                    Attribute = item
+                };
+                _context.Add(ArticleTags);
+            }
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
         // GET: Contributor/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

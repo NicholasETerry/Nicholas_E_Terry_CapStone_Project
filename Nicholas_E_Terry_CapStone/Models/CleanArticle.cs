@@ -23,11 +23,9 @@ namespace Nicholas_E_Terry_CapStone.Models
         public int? ArticleAuthorId { get; set; }
         public ArticleAuthor ArticleAuthor { get; set; }
 
-        [ForeignKey("UserSuggestedArticleAttributes")]
-        public int? UserSuggestedArticleAttributesId { get; set; }
-        public UserSuggestedArticleAttribute UserSuggestedArticleAttributes { get; set; }
-
         [NotMapped]
         public string ConsumerComment { get; set; }
+        [NotMapped]
+        public List<string> ArticleTags { get; set; }
     }
 }

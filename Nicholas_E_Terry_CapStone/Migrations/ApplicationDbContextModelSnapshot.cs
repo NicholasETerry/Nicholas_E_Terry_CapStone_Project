@@ -48,15 +48,15 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "17ed7d72-8df7-4031-b4b0-6e34b6fa793b",
-                            ConcurrencyStamp = "bfef376d-e0ff-4094-9ee2-ffdc4b62e156",
+                            Id = "ec5c3fd8-4578-4607-8e8d-b9d2170c0203",
+                            ConcurrencyStamp = "4844b645-e12c-476f-b8ee-b6bf7ecb4d2c",
                             Name = "Consumer",
                             NormalizedName = "CONSUMER"
                         },
                         new
                         {
-                            Id = "0260e2a0-fd20-4fd4-b6a4-6ea23a6b09f4",
-                            ConcurrencyStamp = "4dbe0425-bd1e-4c64-abb3-f69286fea170",
+                            Id = "8354d3b7-9cdd-4394-b9fb-00b9fee8cdd8",
+                            ConcurrencyStamp = "b40d8c5b-6a96-4588-b8ee-2c36d1b21e38",
                             Name = "Contributor",
                             NormalizedName = "CONTRIBUTOR"
                         });
@@ -372,9 +372,6 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Experience")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Occupation_user")
                         .HasColumnType("nvarchar(max)");
 
@@ -436,6 +433,26 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                     b.HasIndex("UserModelId");
 
                     b.ToTable("Skills");
+                });
+
+            modelBuilder.Entity("Nicholas_E_Terry_CapStone.Models.TagContributorSuggested", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Attribute")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("TagsContributorsSuggest");
                 });
 
             modelBuilder.Entity("Nicholas_E_Terry_CapStone.Models.UserModel", b =>
@@ -527,26 +544,6 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                     b.ToTable("UserNamesModel");
                 });
 
-            modelBuilder.Entity("Nicholas_E_Terry_CapStone.Models.UserSuggestedArticleAttribute", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Attribute")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserSuggestedArticleAttributes");
-                });
-
             modelBuilder.Entity("Nicholas_E_Terry_CapStone.Models.Vote", b =>
                 {
                     b.Property<int>("Id")
@@ -632,7 +629,7 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                         .WithMany()
                         .HasForeignKey("ArticleAuthorId");
 
-                    b.HasOne("Nicholas_E_Terry_CapStone.Models.UserSuggestedArticleAttribute", "UserSuggestedArticleAttributes")
+                    b.HasOne("Nicholas_E_Terry_CapStone.Models.TagContributorSuggested", "UserSuggestedArticleAttributes")
                         .WithMany()
                         .HasForeignKey("UserSuggestedArticleAttributesId");
                 });
@@ -669,6 +666,15 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                         .HasForeignKey("UserModelId");
                 });
 
+            modelBuilder.Entity("Nicholas_E_Terry_CapStone.Models.TagContributorSuggested", b =>
+                {
+                    b.HasOne("Nicholas_E_Terry_CapStone.Models.UserModel", "UserModel")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Nicholas_E_Terry_CapStone.Models.UserModel", b =>
                 {
                     b.HasOne("Nicholas_E_Terry_CapStone.Models.Education", "Education")
@@ -694,15 +700,6 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                     b.HasOne("Nicholas_E_Terry_CapStone.Models.UserNameModel", "UserNameModel")
                         .WithMany()
                         .HasForeignKey("UserNameId");
-                });
-
-            modelBuilder.Entity("Nicholas_E_Terry_CapStone.Models.UserSuggestedArticleAttribute", b =>
-                {
-                    b.HasOne("Nicholas_E_Terry_CapStone.Models.UserModel", "UserModel")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Nicholas_E_Terry_CapStone.Models.Vote", b =>

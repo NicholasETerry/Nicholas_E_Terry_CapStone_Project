@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Nicholas_E_Terry_CapStone.Models
 {
-    public class UserSuggestedArticleAttribute
+    public class TagContributorSuggested
     {
         [Key]
         public int Id { get; set; }
@@ -16,5 +16,9 @@ namespace Nicholas_E_Terry_CapStone.Models
         [ForeignKey("UserModel")]
         public int UserId { get; set; }
         public UserModel UserModel { get; set; }
+
+        [ForeignKey("CleanArticle")]
+        public int TagCleanArticleId { get; set; }
+        public CleanArticle TagCleanArticle { get; set; }
     }
 }
