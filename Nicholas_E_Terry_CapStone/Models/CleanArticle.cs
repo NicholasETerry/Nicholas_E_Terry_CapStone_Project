@@ -18,6 +18,7 @@ namespace Nicholas_E_Terry_CapStone.Models
         public string Pub_date { get; set; }
         public string News_desk { get; set; }
         public string Article_filepath { get; set; }
+        public string UniqueId { get; set; }
 
         [ForeignKey("ArticleAuthor")]
         public int? ArticleAuthorId { get; set; }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Nicholas_E_Terry_CapStone.Models.CleanArticle>
+﻿@model Nicholas_E_Terry_CapStone.Models.CleanArticle
 
 @{
     ViewData["Title"] = "Index";
@@ -23,26 +23,23 @@
 <button type="button" class="btn btn-outline-primary" onclick="openNav()">&#9776;</button>
 <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
 <div id="main">
-    @foreach (var item in Model)
-    {
-        <div class="container">
-            <div class="navbar">
-                <a onlick="updateVote()" href="#home">Votes</a>
-                <a href="#news">contributor userName that reviewed article</a>
-            </div>
-            <div class="jumbotron">
-                <p class="lead">@item.Lead_paragraph</p>
-                <details>
-                    <summary>Click To Read Article</summary>
-                    <p @*class="lead"*@>@item.Word_count</p>
-                </details>
-                <hr class="my-4">
-                <p class="lead">
-                    <a class="btn btn-primary btn-lg" href=@item.Web_url role="button">Read Article</a>
-                </p>
-            </div>
+    <div class="container">
+        <div class="navbar">
+            <a onlick="updateVote()" href="#home">Votes</a>
+            <a href="#news">contributor userName that reviewed article</a>
         </div>
-    }
+        <div class="jumbotron">
+            <p class="lead">@Model.Lead_paragraph</p>
+            <details>
+                <summary>Click To Read Article</summary>
+                <p @*class="lead"*@>@Model.Word_count</p>
+            </details>
+            <hr class="my-4">
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" href=@Model.Web_url role="button">Read Article</a>
+            </p>
+        </div>
+    </div>
 </div>
 
 @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

@@ -48,15 +48,15 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ec5c3fd8-4578-4607-8e8d-b9d2170c0203",
-                            ConcurrencyStamp = "4844b645-e12c-476f-b8ee-b6bf7ecb4d2c",
+                            Id = "89877a88-c1b5-47ef-8a96-8df74f7dcb9c",
+                            ConcurrencyStamp = "9a935ac2-ff90-4bcf-a283-31ccdac580d7",
                             Name = "Consumer",
                             NormalizedName = "CONSUMER"
                         },
                         new
                         {
-                            Id = "8354d3b7-9cdd-4394-b9fb-00b9fee8cdd8",
-                            ConcurrencyStamp = "b40d8c5b-6a96-4588-b8ee-2c36d1b21e38",
+                            Id = "5647e66d-703c-4a9c-87af-ac1dff269fb4",
+                            ConcurrencyStamp = "1017573b-bb93-4ea0-99b9-320c63c3f568",
                             Name = "Contributor",
                             NormalizedName = "CONTRIBUTOR"
                         });
@@ -280,8 +280,8 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                     b.Property<string>("Source")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserSuggestedArticleAttributesId")
-                        .HasColumnType("int");
+                    b.Property<string>("UniqueId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Web_url")
                         .HasColumnType("nvarchar(max)");
@@ -292,8 +292,6 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ArticleAuthorId");
-
-                    b.HasIndex("UserSuggestedArticleAttributesId");
 
                     b.ToTable("CleanArticles");
                 });
@@ -445,10 +443,15 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                     b.Property<string>("Attribute")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("TagCleanArticleId")
+                        .HasColumnType("int");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TagCleanArticleId");
 
                     b.HasIndex("UserId");
 
@@ -628,10 +631,6 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                     b.HasOne("Nicholas_E_Terry_CapStone.Models.ArticleAuthor", "ArticleAuthor")
                         .WithMany()
                         .HasForeignKey("ArticleAuthorId");
-
-                    b.HasOne("Nicholas_E_Terry_CapStone.Models.TagContributorSuggested", "UserSuggestedArticleAttributes")
-                        .WithMany()
-                        .HasForeignKey("UserSuggestedArticleAttributesId");
                 });
 
             modelBuilder.Entity("Nicholas_E_Terry_CapStone.Models.HighLight", b =>
@@ -668,6 +667,12 @@ namespace Nicholas_E_Terry_CapStone.Migrations
 
             modelBuilder.Entity("Nicholas_E_Terry_CapStone.Models.TagContributorSuggested", b =>
                 {
+                    b.HasOne("Nicholas_E_Terry_CapStone.Models.CleanArticle", "TagCleanArticle")
+                        .WithMany()
+                        .HasForeignKey("TagCleanArticleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Nicholas_E_Terry_CapStone.Models.UserModel", "UserModel")
                         .WithMany()
                         .HasForeignKey("UserId")

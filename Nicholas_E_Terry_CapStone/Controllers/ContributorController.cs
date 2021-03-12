@@ -16,7 +16,7 @@ namespace Nicholas_E_Terry_CapStone.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly NYTService _nytService;
-
+        List<CleanArticle> cleaned = new List<CleanArticle>();
         public ContributorController(ApplicationDbContext context, NYTService nytService)
         {
             _context = context;
@@ -36,21 +36,34 @@ namespace Nicholas_E_Terry_CapStone.Controllers
             else
             {
                 var newArticle = await _nytService.GetCurrentArticles();
-                List<CleanArticle> cleaned = new List<CleanArticle>();
+                //List<CleanArticle> cleaned = new List<CleanArticle>();
 
                 int i = 0;
                 foreach (var item in newArticle.response.docs)
                 {
                     CleanArticle newCleanedArticle = new CleanArticle();
                     cleaned.Add(newCleanedArticle);
-                    cleaned[i].Lead_paragraph = item.snippet;
+                    cleaned[i].Lead_paragraph = item.headline.main;
                     cleaned[i].Web_url = item.web_url;
+                    cleaned[i].UniqueId = item._id;
                     var tempResults = await Scrapper.GetHtmlAsString(cleaned[i].Web_url); //just to test the scrapper
                     cleaned[i].Word_count = tempResults;
+
+                    var DoesExist = _context.CleanArticles.Where(a => a.Web_url == cleaned[i].Web_url).FirstOrDefault();
+
+                    if(DoesExist == null)
+                    {
+                        _context.Add(cleaned[i]);
+                    }
+                    else
+                    {
+                        cleaned[i].Id = DoesExist.Id;
+                    }
                     i++;
                 }
-                var applicationDbContext = _context.UserModels.Include(u => u.Education).Include(u => u.Occupation).Include(u => u.Rank).Include(u => u.UserModelAddress).Include(u => u.UserNameModel);
-                return View(cleaned/*await applicationDbContext.ToListAsync()*/);
+                await _context.SaveChangesAsync();
+
+                return View(cleaned);
             }
         }
 
@@ -149,11 +162,17 @@ namespace Nicholas_E_Terry_CapStone.Controllers
             var user = _context.UserModels.Where(c => c.IdentityUserId == userId).FirstOrDefault();
             return RedirectToAction(nameof(Index));
         }
-        public IActionResult ArticleReview()
+        public IActionResult ArticleReview(int? id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
             TagLibrary newTagLibrary = new TagLibrary();
             ViewData["TagLibrary"] = newTagLibrary.tagLibrary;
-            return View();
+            var currentReviewArticle = _context.CleanArticles.Where(c => c.Id == id).FirstOrDefault();
+
+            return View(currentReviewArticle);
         }
         [HttpPost]
         public async Task<IActionResult> ArticleReview(CleanArticle reviewedArticle)

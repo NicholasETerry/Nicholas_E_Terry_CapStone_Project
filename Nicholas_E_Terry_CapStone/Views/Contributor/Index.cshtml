@@ -40,6 +40,10 @@
                 <p class="lead">
                     <a class="btn btn-primary btn-lg" href=@item.Web_url role="button">Read Article</a>
                 </p>
+                <p>@item.UniqueId</p>
+                <p class="lead">
+                    <a asp-controller="Contributor" asp-action="ArticleReview" asp-route-id="@item.Id">Review Article</a>
+                </p>
             </div>
         </div>
     }
