@@ -16,7 +16,7 @@ namespace Nicholas_E_Terry_CapStone.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly NYTService _nytService;
-        List<CleanArticle> cleaned = new List<CleanArticle>();
+        //List<CleanArticle> cleaned = new List<CleanArticle>();
         public ContributorController(ApplicationDbContext context, NYTService nytService)
         {
             _context = context;
@@ -36,7 +36,7 @@ namespace Nicholas_E_Terry_CapStone.Controllers
             else
             {
                 var newArticle = await _nytService.GetCurrentArticles();
-                //List<CleanArticle> cleaned = new List<CleanArticle>();
+                List<CleanArticle> cleaned = new List<CleanArticle>();
 
                 int i = 0;
                 foreach (var item in newArticle.response.docs)

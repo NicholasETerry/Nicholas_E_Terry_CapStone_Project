@@ -35,10 +35,21 @@
                 <p @*class="lead"*@>@Model.Word_count</p>
             </details>
             <hr class="my-4">
-            <p class="lead">
-                <a class="btn btn-primary btn-lg" href=@Model.Web_url role="button">Read Article</a>
-            </p>
         </div>
+        <select asp-for="ArticleTags" multiple="multiple">
+            @foreach (var item in (List<string>)ViewBag.TagLibrary)
+            {
+                <option value="@item">@item</option>
+            }
+        </select>
+        <form asp-for="@Model.ConsumerComment">
+            <label for="Suggestions">Suggestions:</label>
+            <textarea id="Suggestions" name="Suggestions" rows="4" cols="50">
+                          Input Article Suggestions Here
+                         </textarea>
+            <br><br>
+            <input type="submit" value="Submit">
+        </form>
     </div>
 </div>
 
