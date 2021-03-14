@@ -26,6 +26,11 @@ namespace Nicholas_E_Terry_CapStone.Controllers
             List<Skill> allSkills = _context.Skills.ToList();
             return Ok(allSkills);
         }
+        [HttpGet]
+        public IActionResult GetVotes()
+        {
+            return Ok();
+        }
 
         // GET api/<RequestController>/5
         [HttpGet("{id}")]
