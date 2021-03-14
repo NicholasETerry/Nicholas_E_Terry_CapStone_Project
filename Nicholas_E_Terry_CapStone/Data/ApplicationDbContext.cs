@@ -32,6 +32,7 @@ namespace Nicholas_E_Terry_CapStone.Data
         public DbSet<CleanArticle> CleanArticles { get; set; }
         public DbSet<ArticleAuthor> ArticleAuthors { get; set; }
         public DbSet<Vote> Votes { get; set; }
+        public DbSet<ContributorComment> ContributorComments { get; set; }
         public DbSet<TagContributorSuggested> TagsContributorsSuggest { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -16,7 +16,7 @@ namespace Nicholas_E_Terry_CapStone.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly NYTService _nytService;
-        //List<CleanArticle> cleaned = new List<CleanArticle>();
+        List<CleanArticle> cleaned = new List<CleanArticle>();
         public ContributorController(ApplicationDbContext context, NYTService nytService)
         {
             _context = context;
@@ -26,6 +26,7 @@ namespace Nicholas_E_Terry_CapStone.Controllers
         // GET: Contributor
         public async Task<IActionResult> Index()
         {
+            
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user =  _context.UserModels.Where(c => c.IdentityUserId ==
             userId).FirstOrDefault();
@@ -36,7 +37,7 @@ namespace Nicholas_E_Terry_CapStone.Controllers
             else
             {
                 var newArticle = await _nytService.GetCurrentArticles();
-                List<CleanArticle> cleaned = new List<CleanArticle>();
+                //List<CleanArticle> cleaned = new List<CleanArticle>();
 
                 int i = 0;
                 foreach (var item in newArticle.response.docs)
@@ -62,11 +63,51 @@ namespace Nicholas_E_Terry_CapStone.Controllers
                     i++;
                 }
                 await _context.SaveChangesAsync();
-
+                List<int> userList = new List<int>();
+                List<int> articleList = new List<int>();
+                var newTag = _context.TagsContributorsSuggest.ToList();
+                foreach (var item in newTag)
+                {
+                    if (userList.Contains(item.UserId) == false)
+                    {
+                        userList.Add(item.UserId);
+                        articleList.Add(item.TagCleanArticleId);
+                    }
+                }
+                ViewData["userList"] = userList;
+                ViewData["articleList"] = articleList;
                 return View(cleaned);
             }
         }
+        public async Task<IActionResult> BreakingNews()
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = _context.UserModels.Where(c => c.IdentityUserId ==
+            userId).FirstOrDefault();
+            if (user != null)
+            {
+                var newArticle = await _nytService.GetBreakingArticles();
+                List<CleanArticle> cleaned = new List<CleanArticle>();
 
+                int i = 0;
+                foreach (var item in newArticle.response.docs)
+                {
+                    CleanArticle newCleanedArticle = new CleanArticle();
+                    cleaned.Add(newCleanedArticle);
+                    cleaned[i].Lead_paragraph = item.snippet;
+                    cleaned[i].Web_url = item.web_url;
+                    var tempResults = await Scrapper.GetHtmlAsString(cleaned[i].Web_url); //just to test the scrapper
+                    cleaned[i].Word_count = tempResults;
+                    i++;
+                }
+                var applicationDbContext = _context.UserModels.Include(u => u.Education).Include(u => u.Occupation).Include(u => u.Rank).Include(u => u.UserModelAddress).Include(u => u.UserNameModel);
+                return View(cleaned/*await applicationDbContext.ToListAsync()*/);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Contributor", new { area = "Contributor" });
+            }
+        }
         // GET: Contributor/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -187,9 +228,20 @@ namespace Nicholas_E_Terry_CapStone.Controllers
                     TagCleanArticleId = reviewedArticle.Id,
                     Attribute = item
                 };
-                _context.Add(ArticleTags);
+                _context.TagsContributorsSuggest.Add(ArticleTags);
             }
             await _context.SaveChangesAsync();
+
+            var newComment = new ContributorComment
+            {
+                contributorComment = reviewedArticle.Comment,
+                Contributor_Comment_Clean_Article_Id = reviewedArticle.Id,
+                Contributor_Comment_UserModel_Id = user.Id
+            };
+
+            _context.ContributorComments.Add(newComment);
+            await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
         // GET: Contributor/Edit/5

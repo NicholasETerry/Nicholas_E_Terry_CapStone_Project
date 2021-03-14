@@ -29,8 +29,8 @@
     {
         <div class="container">
             <div class="navbar">
-                <a onlick="updateVote()" href="#home">Votes</a>
-                <a href="#news">contributor userName that reviewed article</a>
+                @*<a onlick="updateVote()" href="#home">Votes</a>
+                <a href="#news">contributor userName that reviewed article</a>*@
             </div>
             <div class="jumbotron">
                 <p class="lead">@item.Lead_paragraph</p>
@@ -39,9 +39,9 @@
                     <p @*class="lead"*@>@item.Word_count</p>
                 </details>
                 <hr class="my-4">
-                <p class="lead">
+                @*<p class="lead">
                     <a class="btn btn-primary btn-lg" href=@item.Web_url role="button">Read Article</a>
-                </p>
+                </p>*@
             </div>
         </div>
     }

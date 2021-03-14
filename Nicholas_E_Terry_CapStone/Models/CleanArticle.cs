@@ -25,8 +25,9 @@ namespace Nicholas_E_Terry_CapStone.Models
         public ArticleAuthor ArticleAuthor { get; set; }
 
         [NotMapped]
-        public string ConsumerComment { get; set; }
+        public string Comment { get; set; }
         [NotMapped]
         public List<string> ArticleTags { get; set; }
+
     }
 }

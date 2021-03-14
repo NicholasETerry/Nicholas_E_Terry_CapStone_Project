@@ -34,6 +34,7 @@ namespace Nicholas_E_Terry_CapStone.Controllers
             {              
                 var newArticle = await _nytService.GetCurrentArticles();
                 List<CleanArticle> cleaned = new List<CleanArticle>();
+                 
           
                 int i = 0;
                 foreach (var item in newArticle.response.docs)
@@ -79,7 +80,7 @@ namespace Nicholas_E_Terry_CapStone.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Contributor", new { area = "Contributor" });
+                return RedirectToAction("Index", "Consumer", new { area = "Consumer" });
             }
         }
         // GET: Consumer/Delete/5

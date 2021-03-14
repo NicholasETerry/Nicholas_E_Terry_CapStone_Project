@@ -23,14 +23,14 @@ namespace Nicholas_E_Terry_CapStone.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            List<Skill> allSkills = _context.Skills.ToList();
-            return Ok(allSkills);
-        }
-        [HttpGet]
-        public IActionResult GetVotes()
-        {
+
             return Ok();
         }
+        //[HttpGet]
+        //public IActionResult Get()
+        //{
+        //    return Ok();
+        //}
 
         // GET api/<RequestController>/5
         [HttpGet("{id}")]
@@ -41,8 +41,16 @@ namespace Nicholas_E_Terry_CapStone.Controllers
 
         // POST api/<RequestController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] ContributorComment newComment)
         {
+            // comment
+            // article id
+            //user id
+            //newComment.Contributor_Comment_UserModel_Id = Convert.ToInt32(listReturned[2]);
+            _context.ContributorComments.Add(newComment);
+            _context.SaveChanges();
+
+            return Ok(newComment);
         }
 
         // PUT api/<RequestController>/5

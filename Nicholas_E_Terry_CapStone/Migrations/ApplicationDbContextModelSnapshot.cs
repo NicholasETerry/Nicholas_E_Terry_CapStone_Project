@@ -48,15 +48,15 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "89877a88-c1b5-47ef-8a96-8df74f7dcb9c",
-                            ConcurrencyStamp = "9a935ac2-ff90-4bcf-a283-31ccdac580d7",
+                            Id = "aa594729-21cb-4dd9-84ba-762449a27ea8",
+                            ConcurrencyStamp = "912a9019-0e49-4669-b898-db5855f12943",
                             Name = "Consumer",
                             NormalizedName = "CONSUMER"
                         },
                         new
                         {
-                            Id = "5647e66d-703c-4a9c-87af-ac1dff269fb4",
-                            ConcurrencyStamp = "1017573b-bb93-4ea0-99b9-320c63c3f568",
+                            Id = "ffec053f-b32f-4508-9f1f-fa86cffabb52",
+                            ConcurrencyStamp = "6f3086fc-560e-4c85-82ca-1bf0c8a9838a",
                             Name = "Contributor",
                             NormalizedName = "CONTRIBUTOR"
                         });
@@ -294,6 +294,37 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                     b.HasIndex("ArticleAuthorId");
 
                     b.ToTable("CleanArticles");
+                });
+
+            modelBuilder.Entity("Nicholas_E_Terry_CapStone.Models.ContributorComment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("Contributor_Comment_Clean_ArticleId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Contributor_Comment_Clean_Article_Id")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Contributor_Comment_UserModelId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Contributor_Comment_UserModel_Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("contributorComment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Contributor_Comment_Clean_ArticleId");
+
+                    b.HasIndex("Contributor_Comment_UserModelId");
+
+                    b.ToTable("ContributorComments");
                 });
 
             modelBuilder.Entity("Nicholas_E_Terry_CapStone.Models.Education", b =>
@@ -542,6 +573,9 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                     b.Property<string>("User_name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("User_points")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("UserNamesModel");
@@ -631,6 +665,17 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                     b.HasOne("Nicholas_E_Terry_CapStone.Models.ArticleAuthor", "ArticleAuthor")
                         .WithMany()
                         .HasForeignKey("ArticleAuthorId");
+                });
+
+            modelBuilder.Entity("Nicholas_E_Terry_CapStone.Models.ContributorComment", b =>
+                {
+                    b.HasOne("Nicholas_E_Terry_CapStone.Models.CleanArticle", "Contributor_Comment_Clean_Article")
+                        .WithMany()
+                        .HasForeignKey("Contributor_Comment_Clean_ArticleId");
+
+                    b.HasOne("Nicholas_E_Terry_CapStone.Models.UserModel", "Contributor_Comment_UserModel")
+                        .WithMany()
+                        .HasForeignKey("Contributor_Comment_UserModelId");
                 });
 
             modelBuilder.Entity("Nicholas_E_Terry_CapStone.Models.HighLight", b =>

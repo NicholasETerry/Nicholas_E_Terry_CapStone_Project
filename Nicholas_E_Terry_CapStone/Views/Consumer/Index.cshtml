@@ -28,11 +28,19 @@
     {
         <div class="container">
             <div class="navbar">
-                <button onclick="updateVote()">
-                    <i class="fas fa-arrow-circle-up"></i>
-                    <p id="upvote">Votes</p>
-                </button>
+                <a href="" onclick="upVote()">
+                    <div class="box-img">
+                        <img src="~/images/vote.png" height="25" width="25" />
+                    </div>
+                </a>
+
                 <a href="#news">contributor userName that reviewed article</a>
+
+                <a href="" onclick="downVote()">
+                    <div class="box-img">
+                        <img src="~/images/voteTwo.png" height="25" width="25" />
+                    </div>
+                </a>
             </div>
             <div class="jumbotron">
                 <p class="lead">@item.Lead_paragraph</p>
@@ -41,12 +49,12 @@
                     <p @*class="lead"*@>@item.Word_count</p>
                 </details>
                 <hr class="my-4">
-                <p class="lead">
+                @*<p class="lead">
                     <a class="btn btn-primary btn-lg" href=@item.Web_url role="button">Read Article</a>
-                </p>
+                </p>*@
             </div>
             <div>
-                    <form asp-for="@item.ConsumerComment">
+                    <form asp-for="@item.Comment">
                         <label for="Suggestions">Suggestions:</label>
                         <textarea id="Suggestions" name="Suggestions" rows="4" cols="50">
                           Input Article Suggestions Here

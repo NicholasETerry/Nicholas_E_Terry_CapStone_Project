@@ -16,7 +16,12 @@
 //    })
 //})
 
-function updateVote() {
+function upVote() {
     console.log("got to updateVote function")
     document.getElementById("upvote").innerHTML = "1";
 }
+function downVote() {
+    console.log("got to updateVote function")
+    document.getElementById("upvote").innerHTML = "1";
+}
+
