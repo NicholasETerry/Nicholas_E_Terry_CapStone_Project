@@ -48,17 +48,10 @@ namespace Nicholas_E_Terry_CapStone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "aa594729-21cb-4dd9-84ba-762449a27ea8",
-                            ConcurrencyStamp = "912a9019-0e49-4669-b898-db5855f12943",
+                            Id = "56c2e392-8634-476d-bc10-a23af3435ff3",
+                            ConcurrencyStamp = "b6d69058-9bb5-443f-a6c0-df23a0a33df7",
                             Name = "Consumer",
                             NormalizedName = "CONSUMER"
-                        },
-                        new
-                        {
-                            Id = "ffec053f-b32f-4508-9f1f-fa86cffabb52",
-                            ConcurrencyStamp = "6f3086fc-560e-4c85-82ca-1bf0c8a9838a",
-                            Name = "Contributor",
-                            NormalizedName = "CONTRIBUTOR"
                         });
                 });
 

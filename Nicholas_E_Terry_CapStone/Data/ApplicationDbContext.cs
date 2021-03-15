@@ -44,12 +44,12 @@ namespace Nicholas_E_Terry_CapStone.Data
                     Name = "Consumer",
                     NormalizedName = "CONSUMER"
                 }
-                ,
-                new IdentityRole
-                {
-                    Name = "Contributor",
-                    NormalizedName = "CONTRIBUTOR"
-                }
+                //,
+                //new IdentityRole
+                //{
+                //    Name = "Contributor",
+                //    NormalizedName = "CONTRIBUTOR"
+                //}
                 );
         }
     }

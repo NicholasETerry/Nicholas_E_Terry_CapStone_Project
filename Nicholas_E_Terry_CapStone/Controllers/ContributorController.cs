@@ -37,7 +37,7 @@ namespace Nicholas_E_Terry_CapStone.Controllers
             else
             {
                 var newArticle = await _nytService.GetCurrentArticles();
-                //List<CleanArticle> cleaned = new List<CleanArticle>();
+                
 
                 int i = 0;
                 foreach (var item in newArticle.response.docs)
@@ -47,7 +47,7 @@ namespace Nicholas_E_Terry_CapStone.Controllers
                     cleaned[i].Lead_paragraph = item.headline.main;
                     cleaned[i].Web_url = item.web_url;
                     cleaned[i].UniqueId = item._id;
-                    var tempResults = await Scrapper.GetHtmlAsString(cleaned[i].Web_url); //just to test the scrapper
+                    var tempResults = await Scrapper.GetHtmlAsString(cleaned[i].Web_url); 
                     cleaned[i].Word_count = tempResults;
 
                     var DoesExist = _context.CleanArticles.Where(a => a.Web_url == cleaned[i].Web_url).FirstOrDefault();
@@ -63,18 +63,24 @@ namespace Nicholas_E_Terry_CapStone.Controllers
                     i++;
                 }
                 await _context.SaveChangesAsync();
+                List<int> userPoints = new List<int>();
+                List<string> userName = new List<string>();
                 List<int> userList = new List<int>();
                 List<int> articleList = new List<int>();
                 var newTag = _context.TagsContributorsSuggest.ToList();
                 foreach (var item in newTag)
                 {
-                    if (userList.Contains(item.UserId) == false)
+                    
+                    if (articleList.Contains(item.TagCleanArticleId) == false)
                     {
-                        userList.Add(item.UserId);
                         articleList.Add(item.TagCleanArticleId);
+                        var getUser = _context.UserNamesModel.Where(c => c.Id == item.UserId).FirstOrDefault();
+                        userName.Add(getUser.User_name);
+                        userPoints.Add(getUser.User_points);
                     }
                 }
-                ViewData["userList"] = userList;
+                ViewData["userPoint"] = userPoints;
+                ViewData["userName"] = userName;
                 ViewData["articleList"] = articleList;
                 return View(cleaned);
             }
@@ -96,7 +102,7 @@ namespace Nicholas_E_Terry_CapStone.Controllers
                     cleaned.Add(newCleanedArticle);
                     cleaned[i].Lead_paragraph = item.snippet;
                     cleaned[i].Web_url = item.web_url;
-                    var tempResults = await Scrapper.GetHtmlAsString(cleaned[i].Web_url); //just to test the scrapper
+                    var tempResults = await Scrapper.GetHtmlAsString(cleaned[i].Web_url); 
                     cleaned[i].Word_count = tempResults;
                     i++;
                 }
@@ -141,8 +147,7 @@ namespace Nicholas_E_Terry_CapStone.Controllers
             ViewData["OccupationLibrary"] = newOccupationLibrary.occupationLibrary;
             ViewData["HobbyLibrary"] = newHobbyLibrary.hobbyLibrary;
             ViewData["SkillLibrary"] = newSkillLibrary.skillLibrary;
-            var mview = new UserModel {First_name = "test", Last_name = "last Name"}; // for testing only
-            return View(mview);
+            return View();
         }
 
         // POST: Contributor/Create
@@ -197,7 +202,7 @@ namespace Nicholas_E_Terry_CapStone.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> ContributorTest(List<ContributorTest> newTest) // returning nothing at this point.
+        public async Task<IActionResult> ContributorTest(List<ContributorTest> newTest) 
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = _context.UserModels.Where(c => c.IdentityUserId == userId).FirstOrDefault();

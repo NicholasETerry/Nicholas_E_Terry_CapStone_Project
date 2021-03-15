@@ -52,6 +52,7 @@ namespace Nicholas_E_Terry_CapStone.Models
         [NotMapped]
         public List<string> Hobbies { get; set; }
         [NotMapped]
+        [Display(Name = "Previous Occupations")]
         public List<string> Previous_Occupations { get; set; }
     }
 }

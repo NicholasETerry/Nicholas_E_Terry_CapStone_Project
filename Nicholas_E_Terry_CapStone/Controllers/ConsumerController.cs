@@ -45,8 +45,39 @@ namespace Nicholas_E_Terry_CapStone.Controllers
                     cleaned[i].Web_url = item.web_url;
                    var tempResults = await Scrapper.GetHtmlAsString(cleaned[i].Web_url) ; //just to test the scrapper
                     cleaned[i].Word_count = tempResults ;
+
+                    var DoesExist = _context.CleanArticles.Where(a => a.Web_url == cleaned[i].Web_url).FirstOrDefault();
+
+                    if (DoesExist == null)
+                    {
+                        _context.Add(cleaned[i]);
+                    }
+                    else
+                    {
+                        cleaned[i].Id = DoesExist.Id;
+                    }
                     i++;
                 }
+                await _context.SaveChangesAsync();
+                List<int> userPoints = new List<int>();
+                List<string> userName = new List<string>();
+                List<int> userList = new List<int>();
+                List<int> articleList = new List<int>();
+                var newTag = _context.TagsContributorsSuggest.ToList();
+                foreach (var item in newTag)
+                {
+
+                    if (articleList.Contains(item.TagCleanArticleId) == false)
+                    {
+                        articleList.Add(item.TagCleanArticleId);
+                        var getUser = _context.UserNamesModel.Where(c => c.Id == item.UserId).FirstOrDefault();
+                        userName.Add(getUser.User_name);
+                        userPoints.Add(getUser.User_points);
+                    }
+                }
+                ViewData["userPoint"] = userPoints;
+                ViewData["userName"] = userName;
+                ViewData["articleList"] = articleList;
                 return View(cleaned);
             }
             else

@@ -5,9 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml"; 
 }
 
-<h1>Create</h1>
+<h1>Great !</h1>
 
-<h4>UserModel</h4>
+<h4>Let's get some information about you first.</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -58,9 +58,9 @@
                 <input asp-for="Occupation.Occupation_user" class="form-control" />
                 <span asp-validation-for="Occupation.Occupation_user" class="text-danger"></span>
             </div>
-            <div>
+            <div class="form-group">
                 <label asp-for="Skills"></label>
-                <select asp-for="Skills" multiple="multiple">
+                <select asp-for="Skills" multiple="" class="form-control" id="skills">
                     @foreach (var item in (List<string>)ViewBag.SkillLibrary)
                     {
                         <option value="@item">@item</option>
@@ -68,9 +68,9 @@
 
                 </select>
             </div>
-            <div>
+            <div class="form-group">
                 <label asp-for="Hobbies"></label>
-                <select asp-for="Hobbies" multiple="multiple">
+                <select asp-for="Hobbies" multiple=""class="form-control" id="hobbies">
                     @foreach (var item in (List<string>)ViewBag.HobbyLibrary)
                     {
                         <option value="@item">@item</option>
@@ -78,9 +78,9 @@
 
                 </select>
             </div>
-            <div>
+            <div class="form-group">
                 <label asp-for="Previous_Occupations"></label>
-                <select asp-for="Previous_Occupations" multiple="multiple">
+                <select asp-for="Previous_Occupations" multiple="" class="form-control" id="hobbies">
                     @foreach (var item in (List<string>)ViewBag.OccupationLibrary)
                     {
                         <option value="@item">@item</option>
@@ -95,9 +95,9 @@
     </div>
 </div>
 
-<div>
+@*<div>
     <a asp-action="Index">Back to List</a>
-</div>
+</div>*@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

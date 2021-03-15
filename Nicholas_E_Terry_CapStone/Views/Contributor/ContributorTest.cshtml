@@ -4,7 +4,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Test</h1>
+<h1>Please Answer These Questions</h1>
+<h4></h4>
 
 <form asp-action="ContributorTest">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -38,9 +39,9 @@
 </form>
 
 
-<div>
+@*<div>
     <a asp-action="Index">Back to List</a>
-</div>
+</div>*@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -13,11 +13,9 @@
 <!-- The sidebar -->
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-
-    <a href="#">BREAKING NEWS!</a>
-    <a href="#">REVIEW ARTICLES</a>
-    <a href="#">placeholder</a>
-    <a href="#">ABOUT</a>
+    <a asp-controller="Contributor" asp-action="Index">HOME</a>
+    @*<a href="#">BREAKING NEWS!</a>
+    <a href="#">ABOUT</a>*@
 </div>
 <!-- Use any element to open the sidenav -->
 <button type="button" class="btn btn-outline-primary" onclick="openNav()">&#9776;</button>
@@ -26,8 +24,7 @@
     <div id="main">
         <div class="container">
             <div class="navbar">
-                <a onlick="updateVote()" href="#home">Votes</a>
-                <a href="#news">contributor userName that reviewed article</a>
+                <a  href="#">Article Review Points ( 25 points )</a>
             </div>
             <div class="jumbotron">
                 <p class="lead">@Model.Lead_paragraph</p>

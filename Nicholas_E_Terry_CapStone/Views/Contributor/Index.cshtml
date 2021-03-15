@@ -15,9 +15,9 @@
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
     <a asp-controller="Contributor" asp-action="BreakingNews">BREAKING NEWS!</a>
-    <a asp-controller="Contributor" asp-action="ArticleReview">REVIEW ARTICLES</a>
+    @*<a asp-controller="Contributor" asp-action="ArticleReview">REVIEW ARTICLES</a>
     <a href="#">placeholder</a>
-    <a href="#">ABOUT</a>
+    <a href="#">ABOUT</a>*@
 </div>
 <!-- Use any element to open the sidenav -->
 <button type="button" class="btn btn-outline-primary" onclick="openNav()">&#9776;</button>
@@ -31,15 +31,24 @@
     {
         <div class="container">
             <div class="navbar">
-                <img onclick="updateVote()" src="~/images/vote.png" height ="25" widtch ="25" > Votes
-                @*@foreach (var tag in (List<TagContributorSuggested>) ViewBag.TagBag)
+                <a href="#" onclick="upVote()">
+                    <div class="box-img">
+                        <img src="~/images/vote.png" height="25" width="25" />
+                        <br />
+                        <div id="updateThis">vote</div>
+                    </div>
+                </a>
+                @foreach (var article in (List<int>)ViewBag.articleList)
                 {
-                    if(tag.TagCleanArticle.Id == item.Id)
+                    @for (int i = 0; i < ViewBag.articleList.Count; i++)
                     {
-
+                        if (item.Id == article)
+                        {
+                            <a href="#news">@ViewBag.userName[i] </a>
+                        }
                     }
-                }*@
-                <a href="#news">contributor userName that reviewed article</a>
+
+                }
             </div>
             <div class="jumbotron">
                 <p class="lead">@item.Lead_paragraph</p>

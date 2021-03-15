@@ -67,6 +67,7 @@ namespace Nicholas_E_Terry_CapStone.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
             [Required]
+            [Display(Name = "Account Type")]
             public string Role { get; set; }
 
             //[Required]
@@ -93,7 +94,7 @@ namespace Nicholas_E_Terry_CapStone.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    if(await _roleManager.RoleExistsAsync(Input.Role))
+                    if (await _roleManager.RoleExistsAsync(Input.Role))
                     {
                         await _userManager.AddToRoleAsync(user, Input.Role);
                     }

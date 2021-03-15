@@ -14,7 +14,10 @@ namespace Nicholas_E_Terry_CapStone.Models
               {
                   "no author",
                   "bias",
-                  "grammatical errors"
+                  "grammatical errors",
+                  "out of date",
+                  "unnamed source",
+                  "suggestive speak"
               };
         }
     }

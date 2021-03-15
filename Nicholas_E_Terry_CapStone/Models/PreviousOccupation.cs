@@ -11,6 +11,7 @@ namespace Nicholas_E_Terry_CapStone.Models
     {
         [Key]
         public int Id { get; set; }
+        [Display(Name ="Previous Occupations")]
         public string Previous_occupation { get; set; }
 
         [ForeignKey("UserModel")]

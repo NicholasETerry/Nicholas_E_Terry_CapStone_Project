@@ -15,10 +15,10 @@
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     @*<button type="button" class="btn btn-primary btn-lg btn-block">Upgrade To Contributor Level</button>*@
     <a asp-controller="Contributor" asp-action="Create">Upgrade To Contributor Level</a>
-    <a asp-controller="Consumer" asp-action="BreakingNews">BREAKING NEWS !!!!!</a>
-    <a href="#">Placeholder</a>
+    <a asp-controller="Consumer" asp-action="BreakingNews">BREAKING NEWS !</a>
+    @*<a href="#">Placeholder</a>
     <a href="#">placeholder</a>
-    <a href="#">ABOUT</a>
+    <a href="#">ABOUT</a>*@
 </div>
 <!-- Use any element to open the sidenav -->
 <button type="button" class="btn btn-outline-primary" onclick="openNav()">&#9776;</button>
@@ -28,42 +28,47 @@
     {
         <div class="container">
             <div class="navbar">
-                <a href="" onclick="upVote()">
+                <a href="#" onclick="upVote()">
                     <div class="box-img">
                         <img src="~/images/vote.png" height="25" width="25" />
+                        <br />
+                        <div id="updateThis">vote</div>
                     </div>
                 </a>
+                @foreach (var article in (List<int>)ViewBag.articleList)
+                {
+                    @for (int i = 0; i < ViewBag.articleList.Count; i++)
+                    {
+                        if (item.Id == article)
+                        {
+                            <a href="#news">@ViewBag.userName[i] </a>
+                        }
+                    }
 
-                <a href="#news">contributor userName that reviewed article</a>
-
-                <a href="" onclick="downVote()">
-                    <div class="box-img">
-                        <img src="~/images/voteTwo.png" height="25" width="25" />
-                    </div>
-                </a>
-            </div>
-            <div class="jumbotron">
-                <p class="lead">@item.Lead_paragraph</p>
-                <details>
-                    <summary>Click To Read Article</summary>
-                    <p @*class="lead"*@>@item.Word_count</p>
-                </details>
-                <hr class="my-4">
-                @*<p class="lead">
-                    <a class="btn btn-primary btn-lg" href=@item.Web_url role="button">Read Article</a>
-                </p>*@
-            </div>
-            <div>
-                    <form asp-for="@item.Comment">
-                        <label for="Suggestions">Suggestions:</label>
-                        <textarea id="Suggestions" name="Suggestions" rows="4" cols="50">
-                          Input Article Suggestions Here
-                         </textarea>
-                        <br><br>
-                        <input type="submit" value="Submit">
-                    </form>
+                }
             </div>
         </div>
+        <div class="jumbotron">
+            <p class="lead">@item.Lead_paragraph</p>
+            <details>
+                <summary>Click To Read Article</summary>
+                <p @*class="lead"*@>@item.Word_count</p>
+            </details>
+            <hr class="my-4">
+            @*<p class="lead">
+                <a class="btn btn-primary btn-lg" href=@item.Web_url role="button">Read Article</a>
+            </p>*@
+        </div>
+        <div>
+            <div class="form-group">
+                <label for="suggestions">Article Suggestions</label>
+                <textarea asp-for="@item.Comment" class="form-control" id="suggestions" rows="3"></textarea>
+            </div>
+            <div onclick="clear()" class="form-group">
+                <a href="#" onclick="clear()" class="btn btn-primary">Submit Suggestion</a>
+            </div>
+        </div>
+        
     }
 </div>
 
