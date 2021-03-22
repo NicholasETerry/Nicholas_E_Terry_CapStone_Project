@@ -3,3 +3,4 @@ How confident are you in the news you read? Throughout the history of the United
 
 This project used ASP.NET MVC , C# , REST , JavsScript, Html, CSS 
 This project was worked on for 10 days and will not be updated.
+I plan to take this idea and recreate this project from the ground up utilizing what I learned.
